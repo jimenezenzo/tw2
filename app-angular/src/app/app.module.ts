@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { CarritoComponent } from './carrito/carrito.component';
+import { ResetPasswordComponent } from './Auth/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { CarritoComponent } from './carrito/carrito.component';
     HomeComponent,
     HeaderComponent,
     FooterComponent,
-    CarritoComponent
+    CarritoComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,

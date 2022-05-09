@@ -5,13 +5,17 @@ import { InicioComponent } from './Inicio/inicio.component';
 import { LoginComponent } from './Auth/login/login.component';
 import { RegistrarComponent } from './Auth/registrar/registrar.component';
 import { HomeComponent } from './home/home.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
     InicioComponent,
     LoginComponent,
     RegistrarComponent,
-    HomeComponent
+    HomeComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

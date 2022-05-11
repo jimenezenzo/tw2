@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { ProductoStateModel} from '../Store/Producto/Producto.model';
+import { AddProducto, RemoveProducto, UpdateCantidad } from '../Store/Producto/Producto.actions';
 
 @Component({
   selector: 'app-carrito',
@@ -7,9 +11,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CarritoComponent implements OnInit {
 
-  constructor() { }
+  carrito: Observable<ProductoStateModel[]>;
 
-  ngOnInit(): void {
+  constructor(private store: Store) {
+    this.carrito = this.store.select(state => state.carrito.productos)
   }
 
+  ngOnInit(): void {}
+
+  public removeProducto(id: number) {
+    this.store.dispatch(new RemoveProducto(id));
+  }
+
+  public updateCantidad(id: number, cant: number){
+    this.store.dispatch(new UpdateCantidad(id, cant));
+  }
 }

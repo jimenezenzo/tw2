@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -9,8 +11,13 @@ export class HeaderComponent implements OnInit {
 
   cartOpen = false;
   isOpen = false;
-  
-  constructor() { }
+  cantidadCarrito: number = 0;
+
+  constructor(private store: Store) {
+    this.store.select(state => state.carrito.productos).subscribe(p => {
+      this.cantidadCarrito = p.length
+    })
+  }
 
   ngOnInit(): void {
   }

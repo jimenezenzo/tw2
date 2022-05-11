@@ -1,8 +1,11 @@
-export interface ProductoInterface {
+export interface ProductoStateModel {
     id: number;
-    text: string;
+    nombre: string;
+    clasificacion: string,
+    precio: number,
+    cantidad: number
 };
 
-export interface CarritoInterface {
-    productos: ProductoInterface[]
+export interface CarritoStateModel {
+    productos: ProductoStateModel[]
 };

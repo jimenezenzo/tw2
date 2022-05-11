@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Store, Select } from '@ngxs/store';
+import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { ProductoState } from '../Store/Producto/Producto.state';
-import { CarritoInterface, ProductoInterface} from '../Store/Producto/Producto.model';
-import { RemoveProducto } from '../Store/Producto/Producto.actions';
+import { ProductoStateModel} from '../Store/Producto/Producto.model';
+import { AddProducto, RemoveProducto, UpdateCantidad } from '../Store/Producto/Producto.actions';
 
 @Component({
   selector: 'app-carrito',
@@ -12,19 +11,19 @@ import { RemoveProducto } from '../Store/Producto/Producto.actions';
 })
 export class CarritoComponent implements OnInit {
 
-  @Select(ProductoState.getProductos) carrito$?: Observable<ProductoInterface>;
+  carrito: Observable<ProductoStateModel[]>;
 
-  constructor(private store: Store) {}
-
-  ngOnInit(): void {
-    console.log('carrito', this.carrito$)
+  constructor(private store: Store) {
+    this.carrito = this.store.select(state => state.carrito.productos)
   }
 
-  // public removeProducto(id: number) {
-  //   this.store.dispatch(new RemoveProducto(id));
-  // }
+  ngOnInit(): void {}
 
-  // public addProducto(id: number, text: string){
+  public removeProducto(id: number) {
+    this.store.dispatch(new RemoveProducto(id));
+  }
 
-  // }
+  public updateCantidad(id: number, cant: number){
+    this.store.dispatch(new UpdateCantidad(id, cant));
+  }
 }

@@ -1,6 +1,6 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { Injectable } from '@angular/core';
-import { CarritoStateModel, ProductoStateModel } from './Producto.model';
+import { CarritoStateModel } from './Producto.model';
 import { AddProducto, RemoveProducto, UpdateCantidad } from './Producto.actions';
 
 @State({
@@ -11,7 +11,7 @@ import { AddProducto, RemoveProducto, UpdateCantidad } from './Producto.actions'
   })
 @Injectable()
 export class ProductoState {
-
+    // Obtiene todos los productos del estado
     @Selector()
     static getProductos(state: CarritoStateModel) {
         return state.productos
@@ -23,13 +23,13 @@ export class ProductoState {
       const state = ctx.getState();
       const productos = state.productos;
         
-      if(!productos.some(p => p.id == producto.id)){
+      if(productos.some(p => p.id == producto.id)){
+        this.updateCantidad(ctx, new UpdateCantidad(producto.id, producto.cantidad))
+      }
+      else{
         ctx.patchState({
-            productos: [
-                ...state.productos,
-                producto
-            ]
-          });
+            productos: [...state.productos, producto]
+        })
       }
     }
 
@@ -43,6 +43,7 @@ export class ProductoState {
         });
     }
 
+    // Actualizar la cantidad de un producto del estado
     @Action(UpdateCantidad)
     updateCantidad(ctx: StateContext<CarritoStateModel>, {id, cant}: UpdateCantidad) {
         const state = ctx.getState();

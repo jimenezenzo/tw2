@@ -9,6 +9,8 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { ResetPasswordComponent } from './Auth/reset-password/reset-password.component';
+import { ProductosServiceService } from './services/productos/productos-service.service';
+import { CategoriasComponent } from './categorias/categorias/categorias.component';
 
 @NgModule({
   declarations: [
@@ -19,13 +21,14 @@ import { ResetPasswordComponent } from './Auth/reset-password/reset-password.com
     HeaderComponent,
     FooterComponent,
     CarritoComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    CategoriasComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [ProductosServiceService],
   bootstrap: [InicioComponent]
 })
 export class AppModule { }

@@ -13,11 +13,13 @@ export class HomeComponent implements OnInit {
   
   carrito: Observable<ProductoStateModel[]>;
 
+
   constructor(private store: Store) {
-    this.carrito = this.store.select(state => state.carrito.productos)
+    this.carrito = this.store.select(state => state.carrito.productos);
   }
 
   ngOnInit(): void {
+
   }
 
   public addProducto(id: number, nombre: string, clasificacion: string, precio: number, cantidad: number){

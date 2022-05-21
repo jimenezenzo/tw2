@@ -9,6 +9,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { ResetPasswordComponent } from './Auth/reset-password/reset-password.component';
+import {FiltroComponent} from "./filtro/filtro.component"
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ResetPasswordComponent } from './Auth/reset-password/reset-password.com
     HeaderComponent,
     FooterComponent,
     CarritoComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    FiltroComponent
   ],
   imports: [
     BrowserModule,

@@ -11,6 +11,7 @@ import { CarritoComponent } from './carrito/carrito.component';
 import { ResetPasswordComponent } from './Auth/reset-password/reset-password.component';
 import { ProductosServiceService } from './services/productos/productos-service.service';
 import { CategoriasComponent } from './categorias/categorias/categorias.component';
+import {FiltroComponent} from "./filtro/filtro.component"
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { CategoriasComponent } from './categorias/categorias/categorias.componen
     CarritoComponent,
     ResetPasswordComponent,
     CategoriasComponent
+    FiltroComponent
   ],
   imports: [
     BrowserModule,

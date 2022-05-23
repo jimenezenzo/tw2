@@ -16,7 +16,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { ResetPasswordComponent } from './Auth/reset-password/reset-password.component';
-import { ProductosServiceService } from './services/productos/productos-service.service';
+import { ProductosService } from './services/productos/productos.service';
 import { CategoriasComponent } from './categorias/categorias/categorias.component';
 import {FiltroComponent} from "./filtro/filtro.component"
 
@@ -30,7 +30,7 @@ import {FiltroComponent} from "./filtro/filtro.component"
     FooterComponent,
     CarritoComponent,
     ResetPasswordComponent,
-    CategoriasComponent
+    CategoriasComponent,
     FiltroComponent
   ],
   imports: [
@@ -49,7 +49,7 @@ import {FiltroComponent} from "./filtro/filtro.component"
     }),
     HttpClientModule
   ],
-  providers: [ProductosServiceService],
+  providers: [ProductosService],
   bootstrap: [InicioComponent]
 })
 export class AppModule { }

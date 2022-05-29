@@ -32,6 +32,10 @@ const productoSchema = mongoose.Schema({
     almacenamiento: {
         type: String,
         required: true
+    },
+    stock: {
+        type: Number,
+        required: true
     }
 },
 {

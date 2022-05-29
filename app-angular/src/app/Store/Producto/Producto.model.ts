@@ -1,14 +1,5 @@
-export interface ProductoStateModel {
-    id: string;
-    nombre: string;
-    categoria: string,
-    precio: number,
-    descripcion: string,
-    almacenamiento: string,
-    color: string,
-    cantidad: number
-};
+import { ItemProducto } from "src/app/models/ItemProducto";
 
 export interface CarritoStateModel {
-    productos: ProductoStateModel[]
+    productos: ItemProducto[]
 };

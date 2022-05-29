@@ -1,8 +1,8 @@
-import { ProductoStateModel } from "./Producto.model";
+import { ItemProducto } from "src/app/models/ItemProducto";
 
 export class AddProducto {
     static readonly type = '[PRODUCTOS] Add';
-    constructor( public producto: ProductoStateModel ) {}
+    constructor( public itemProducto: ItemProducto ) {}
 }
 
 export class RemoveProducto {

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
+import { ItemProducto } from '../models/ItemProducto';
 import { Producto } from '../models/producto';
 import { ProductosService } from '../services/productos/productos.service';
 import { AddProducto } from '../Store/Producto/Producto.actions';
-import { ProductoStateModel } from '../Store/Producto/Producto.model';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +13,7 @@ import { ProductoStateModel } from '../Store/Producto/Producto.model';
 })
 export class HomeComponent implements OnInit {
   
-  carrito: Observable<ProductoStateModel[]>;
+  carrito: Observable<ItemProducto[]>;
   productos:Producto[];
   productoSelect: Producto;
 
@@ -30,11 +30,11 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  public addProducto(producto: Producto){
-    this.store.dispatch(new AddProducto(producto))
+  public addProducto(producto: Producto, cantidad: number){
+    this.store.dispatch(new AddProducto({producto, cantidad}))
   }
 
   // public selectProducto(id: string){
-  //   this.productoSelect = this.productos.find(p => p.id == id)
+  //   this.productoSelect = this.productos.find()
   // }
 }

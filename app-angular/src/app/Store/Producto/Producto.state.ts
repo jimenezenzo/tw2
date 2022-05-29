@@ -1,7 +1,7 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { Injectable } from '@angular/core';
-import { CarritoStateModel } from './Producto.model';
 import { AddProducto, RemoveProducto, UpdateCantidad } from './Producto.actions';
+import { CarritoStateModel } from './Producto.model';
 
 @State({
     name: 'carrito',
@@ -19,16 +19,16 @@ export class ProductoState {
   
     // Añade un nuevo producto al estado
     @Action(AddProducto)
-    addProducto(ctx: StateContext<CarritoStateModel>,  {producto}: AddProducto) {
+    addProducto(ctx: StateContext<CarritoStateModel>,  {itemProducto}: AddProducto) {
       const state = ctx.getState();
       const productos = state.productos;
         
-      if(productos.some(p => p.id == producto.id)){
-        this.updateCantidad(ctx, new UpdateCantidad(producto.id, producto.cantidad))
+      if(productos.some(p => p.producto.id == itemProducto.producto.id)){
+        this.updateCantidad(ctx, new UpdateCantidad(itemProducto.producto.id, itemProducto.cantidad))
       }
       else{
         ctx.patchState({
-            productos: [...state.productos, producto]
+            productos: [...productos, itemProducto]
         })
       }
     }
@@ -39,7 +39,7 @@ export class ProductoState {
         const state = ctx.getState();
 
         ctx.patchState({
-            productos: state.productos.filter(producto => producto.id !== id)
+            productos: state.productos.filter(p => p.producto.id !== id)
         });
     }
 
@@ -50,7 +50,7 @@ export class ProductoState {
 
         ctx.patchState({
             productos: state.productos.map( p => {
-                if((p.id == id) && !(p.cantidad + cant < 1)) p = { ...p, cantidad: p.cantidad + cant }
+                if((p.producto.id == id) && !(p.cantidad + cant < 1)) p = { ...p, cantidad: p.cantidad + cant }
                 return p
             })
         });

@@ -1,8 +1,11 @@
 export interface ProductoStateModel {
-    id: number;
+    id: string;
     nombre: string;
-    clasificacion: string,
+    categoria: string,
     precio: number,
+    descripcion: string,
+    almacenamiento: string,
+    color: string,
     cantidad: number
 };
 

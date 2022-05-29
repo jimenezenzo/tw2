@@ -7,10 +7,10 @@ export class AddProducto {
 
 export class RemoveProducto {
     static readonly type = '[PRODUCTOS] Remove';
-    constructor( public id: number ) {}
+    constructor( public id: string ) {}
 }
 
 export class UpdateCantidad {
     static readonly type = '[PRODUCTOS] Update cantidad';
-    constructor( public id: number, public cant: number ) {}
+    constructor( public id: string, public cant: number ) {}
 }

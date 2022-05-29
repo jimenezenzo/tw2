@@ -14,20 +14,27 @@ import { ProductoStateModel } from '../Store/Producto/Producto.model';
 export class HomeComponent implements OnInit {
   
   carrito: Observable<ProductoStateModel[]>;
-  productos?:Producto[];
+  productos:Producto[];
+  productoSelect: Producto;
 
   constructor(private store: Store, private _productoService:ProductosService) {
     this.carrito = this.store.select(state => state.carrito.productos);
+    this.productos = [];
+    this.productoSelect = this.productos[0]
   }
 
   ngOnInit(): void {
     this._productoService.getAllProducts().subscribe(data => {
       this.productos = data;
-      console.log(this.productos)
+      this.productoSelect = data[0]
     });
   }
 
-  public addProducto(id: number, nombre: string, clasificacion: string, precio: number, cantidad: number){
-    this.store.dispatch(new AddProducto({id, nombre, clasificacion, precio, cantidad}))
+  public addProducto(producto: Producto){
+    this.store.dispatch(new AddProducto(producto))
   }
+
+  // public selectProducto(id: string){
+  //   this.productoSelect = this.productos.find(p => p.id == id)
+  // }
 }

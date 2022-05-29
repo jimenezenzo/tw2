@@ -19,11 +19,11 @@ export class CarritoComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  public removeProducto(id: number) {
+  public removeProducto(id: string) {
     this.store.dispatch(new RemoveProducto(id));
   }
 
-  public updateCantidad(id: number, cant: number){
+  public updateCantidad(id: string, cant: number){
     this.store.dispatch(new UpdateCantidad(id, cant));
   }
 }

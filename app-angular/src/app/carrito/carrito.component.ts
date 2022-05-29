@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { ProductoStateModel} from '../Store/Producto/Producto.model';
-import { AddProducto, RemoveProducto, UpdateCantidad } from '../Store/Producto/Producto.actions';
+import { ItemProducto } from '../models/ItemProducto';
+import { RemoveProducto, UpdateCantidad } from '../Store/Producto/Producto.actions';
 
 @Component({
   selector: 'app-carrito',
@@ -11,7 +11,7 @@ import { AddProducto, RemoveProducto, UpdateCantidad } from '../Store/Producto/P
 })
 export class CarritoComponent implements OnInit {
 
-  carrito: Observable<ProductoStateModel[]>;
+  carrito: Observable<ItemProducto[]>;
 
   constructor(private store: Store) {
     this.carrito = this.store.select(state => state.carrito.productos)
@@ -19,11 +19,11 @@ export class CarritoComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  public removeProducto(id: number) {
+  public removeProducto(id: string) {
     this.store.dispatch(new RemoveProducto(id));
   }
 
-  public updateCantidad(id: number, cant: number){
+  public updateCantidad(id: string, cant: number){
     this.store.dispatch(new UpdateCantidad(id, cant));
   }
 }

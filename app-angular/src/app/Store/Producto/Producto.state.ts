@@ -1,7 +1,7 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { Injectable } from '@angular/core';
 import { AddProducto, RemoveProducto, UpdateCantidad } from './Producto.actions';
-import { CarritoStateModel } from './Producto.model';
+import { CarritoStateModel } from '../../models/Carrito'
 
 @State({
     name: 'carrito',

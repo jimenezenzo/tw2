@@ -12,7 +12,7 @@ import { AddProducto } from '../Store/Producto/Producto.actions';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  
+
   carrito: Observable<ItemProducto[]>;
   productos:Producto[];
   productoSelect: Producto;
@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this._productoService.getAllProducts().subscribe(data => {
+      console.log(data)
       this.productos = data;
       this.productoSelect = data[0]
     });

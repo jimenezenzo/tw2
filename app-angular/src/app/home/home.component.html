@@ -9,13 +9,13 @@
                         alt="Nike Air">
                 </div>
                 <div class="w-full max-w-lg mx-auto mt-5 md:ml-8 md:mt-0 md:w-1/2">
-                    <h3 class="text-gray-700 uppercase text-lg">{{ productoSelect.nombre }}</h3>
-                    <span class="text-gray-500 mt-3">{{ productoSelect.precio }}</span>
+                    <h3 class="text-gray-700 uppercase text-lg">{{ productoSelect?.nombre }}</h3>
+                    <span class="text-gray-500 mt-3">{{ productoSelect?.precio }}</span>
                     <hr class="my-3">
                     <div class="mt-3">
                         <h4 class="text-gray-900">Descripcion</h4>
                         <p class="text-gray-500">
-                            {{ productoSelect.descripcion }}
+                            {{ productoSelect?.descripcion }}
                         </p>
                     </div>
                     <div class="flex items-center mt-6">

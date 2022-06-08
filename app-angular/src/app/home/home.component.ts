@@ -16,6 +16,10 @@ export class HomeComponent implements OnInit {
   carrito: Observable<ItemProducto[]>;
   productos:Producto[];
   productoSelect: Producto;
+  slider:any;
+  defaultTransform:any;
+
+  
 
   constructor(private store: Store, private _productoService:ProductosService) {
     this.carrito = this.store.select(state => state.carrito.productos);
@@ -24,6 +28,9 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.slider = document.getElementById("slider");
+    this.defaultTransform=0;
+
     this._productoService.getAllProducts().subscribe(data => {
       this.productos = data;
       this.productoSelect = data[0]
@@ -34,7 +41,20 @@ export class HomeComponent implements OnInit {
     this.store.dispatch(new AddProducto({producto, cantidad}))
   }
 
-  // public selectProducto(id: string){
-  //   this.productoSelect = this.productos.find()
-  // }
+  goNext() {
+    this.defaultTransform = this.defaultTransform - 398;
+    if (Math.abs(this.defaultTransform) >= this.slider.scrollWidth / 1.7) this.defaultTransform = 0;
+    this.slider.style.transform = "translateX(" + this.defaultTransform + "px)";
+  }
+
+   goPrev() {
+    if (Math.abs(this.defaultTransform) === 0) this.defaultTransform = 0;
+    else this.defaultTransform = this.defaultTransform + 398;
+    this.slider.style.transform = "translateX(" + this.defaultTransform + "px)";
+  }
+
+
+ 
 }
+
+

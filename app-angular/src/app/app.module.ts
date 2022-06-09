@@ -18,7 +18,8 @@ import { CarritoComponent } from './carrito/carrito.component';
 import { ResetPasswordComponent } from './Auth/reset-password/reset-password.component';
 import { ProductosService } from './services/productos/productos.service';
 import { CategoriasComponent } from './categorias/categorias/categorias.component';
-import {FiltroComponent} from "./filtro/filtro.component"
+import {FiltroComponent} from "./filtro/filtro.component";
+import {DetalleComponent} from "./detalle/detalle.component"
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {FiltroComponent} from "./filtro/filtro.component"
     CarritoComponent,
     ResetPasswordComponent,
     CategoriasComponent,
-    FiltroComponent
+    FiltroComponent,
+    DetalleComponent
   ],
   imports: [
     BrowserModule,

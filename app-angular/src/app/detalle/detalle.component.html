@@ -1,0 +1,71 @@
+<button class="bg-blue-500 text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" (click)="toggleModal()">
+    Ver detalle
+  </button>
+  <div *ngIf="showModal" class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+    <div class="relative w-auto my-6 mx-auto max-w-6xl">
+      <!--content-->
+      <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+         <!--header-->
+      <div class="flex items-start justify-between p-5  rounded-t">
+        
+      </div>
+        <!--body-->
+        <div class="relative p-6 flex-auto">
+            <div class="md:flex md:items-center">
+                <div class="w-full h-64 md:w-1/2 lg:h-96">
+                    <img class="h-full  rounded-md object-cover max-w-lg mx-auto"
+                        src="../../assets/img/iphone12.jpg">
+                </div>
+                <div class="w-full  mx-auto mt-5 md:ml-8 md:mt-0 md:w-1/2">
+                    <h3 class="text-gray-700 uppercase text-lg">Apple iPhone 12</h3>
+                    <h3 class="text-3xl font-medium text-gray-700 pt-3">$205000</h3>
+                    <hr class="my-3">
+                    <div class="mt-3">
+                        <h4 class="text-gray-900">Descripcion</h4>
+                        <p class="text-gray-500">
+                            El iPhone 12 tiene una espectacular pantalla Super Retina XDR de 6.1 pulgadas (1). Un frente de Ceramic Shield, cuatro veces más resistente a las caídas (2). Modo Noche en todas las cámaras, para que puedas tomar fotos increíbles con poca luz. Grabación, edición y reproducción de video en Dolby Vision con calidad cinematográfica. Y el potente chip A14 Bionic. Además, es compatible con los nuevos accesorios MagSafe, que se acoplan fácilmente a tu iPhone y permiten una carga inalámbrica más rápida (3). Que comience la diversión.
+                        </p>
+                    </div>
+                    <hr class="my-3">
+                    <div class="mt-5">
+                        <h4 class="text-gray-900">Almacenamiento</h4>
+                        <p class="text-gray-500">
+                            128G
+                        </p>
+                    </div>
+                    <div class="mt-3">
+                        <h4 class="text-gray-900">Color</h4>
+                        <p class="text-gray-500">
+                            Blanco
+                        </p>
+                    </div>
+                    <div class="mt-3">
+                        <h4 class="text-gray-900">Bateria</h4>
+                        <p class="text-gray-500">
+                            3500 ma
+                        </p>
+                    </div>
+                    <div class="mt-3">
+                        <h4 class="text-gray-900">Disponibles</h4>
+                        <p class="text-gray-500">
+                            10 unidades
+                        </p>
+                    </div>
+                    <div class="flex items-center mt-6">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--footer-->
+        <div class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+          <button class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" (click)="toggleModal()">
+            Volver
+          </button>
+          <button class="bg-blue-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" (click)="toggleModal()">
+            Comprar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="showModal" class="opacity-25 fixed inset-0 z-40 bg-black"></div>

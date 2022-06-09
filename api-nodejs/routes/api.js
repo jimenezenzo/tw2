@@ -6,5 +6,7 @@ const router = express.Router();
 // endpoints api
 router.get("/productos", obtenerProductos);
 router.post("/producto", crearProducto);
+router.get("/crear", crearProducto);
+
 
 export default router;

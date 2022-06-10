@@ -3,19 +3,19 @@ import { Producto } from 'src/app/models/producto';
 import { ProductosService } from 'src/app/services/productos/productos.service';
 
 @Component({
-  selector: 'app-categorias',
-  templateUrl: './categorias.component.html',
-  styleUrls: ['./categorias.component.css']
+  selector: 'app-productos',
+  templateUrl: './productos.component.html',
+  styleUrls: ['./productos.component.css']
 })
-export class CategoriasComponent implements OnInit {
-  productos?:Producto[];
+export class ProductosComponent implements OnInit {
+  productos?: Producto[];
+  filtroAbierto = true;
 
   constructor(private _productoService:ProductosService) { }
 
   ngOnInit(): void {
     this._productoService.getAllProducts().subscribe(data => {
       this.productos = data;
-      console.log(this.productos)
     });
   }
 

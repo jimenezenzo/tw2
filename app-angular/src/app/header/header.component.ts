@@ -9,7 +9,6 @@ import { Observable } from 'rxjs';
 })
 export class HeaderComponent implements OnInit {
 
-  filtroAbierto = true;
   cartOpen = false;
   isOpen = false;
   cantidadCarrito: number = 0;

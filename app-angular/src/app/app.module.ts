@@ -17,8 +17,10 @@ import { FooterComponent } from './footer/footer.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { ResetPasswordComponent } from './Auth/reset-password/reset-password.component';
 import { ProductosService } from './services/productos/productos.service';
-import { CategoriasComponent } from './categorias/categorias/categorias.component';
+import { ProductosComponent } from './categorias/productos/productos.component';
 import {FiltroComponent} from "./filtro/filtro.component"
+import {FiltroState} from "./Store/Filtro/Filtro.state"
+import {FormsModule} from "@angular/forms"
 
 @NgModule({
   declarations: [
@@ -30,14 +32,16 @@ import {FiltroComponent} from "./filtro/filtro.component"
     FooterComponent,
     CarritoComponent,
     ResetPasswordComponent,
-    CategoriasComponent,
+    ProductosComponent,
     FiltroComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     NgxsModule.forRoot([
-      ProductoState
+      ProductoState,
+      FiltroState
     ],
       { developmentMode: !environment.production }
     ),

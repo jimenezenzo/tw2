@@ -18,6 +18,7 @@ const obtenerProductos = async (request, response) => {
 //     }
 // };
 
+
 const crearProducto = () => {
 
     Producto.create({
@@ -188,11 +189,10 @@ const crearProducto = () => {
         stock: 15,
         imagen: 'samsungS22Ultra.jpg'
     });
-
-    process.exit;
 };
 
 export {
     obtenerProductos,
-    crearProducto
+    crearProducto, 
+    verDetalle
 }

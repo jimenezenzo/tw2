@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Producto } from '../models/producto';
+
 
 
 @Component({
@@ -8,6 +9,10 @@ import { Producto } from '../models/producto';
 
 })
 export class DetalleComponent {
+
+  @Input()
+  idProducto: any;
+
   showModal = false;
   toggleModal(){
     this.showModal = !this.showModal;

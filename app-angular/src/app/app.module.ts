@@ -19,6 +19,7 @@ import { ResetPasswordComponent } from './Auth/reset-password/reset-password.com
 import { ProductosService } from './services/productos/productos.service';
 import { CategoriasComponent } from './categorias/categorias/categorias.component';
 import {FiltroComponent} from "./filtro/filtro.component"
+import {FiltroState} from "./Store/Filtro/Filtro.state"
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import {FiltroComponent} from "./filtro/filtro.component"
     BrowserModule,
     AppRoutingModule,
     NgxsModule.forRoot([
-      ProductoState
+      ProductoState,
+      FiltroState
     ],
       { developmentMode: !environment.production }
     ),

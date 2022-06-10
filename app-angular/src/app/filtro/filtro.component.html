@@ -14,17 +14,18 @@
       Filtros
     </p>
 
-    <button class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium rounded-md">
+    <button (click)="resetearFiltro" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium rounded-md">
       Resetear Filtros
     </button>
   </div>
 
   <div>
     <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-1 gap-4 mt-3">
-      <select class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
-        <option value="">Color</option>
-        <option value="for-rent">Azul</option>
-        <option value="for-sale">Violeta</option>
+      <select (change)="cambiarFiltro('Color', $any($event.target).value)" class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
+        <option selected value="color">Color</option>
+        <option [value]="color" *ngFor="let color of colores">
+          {{color}}
+        </option>
       </select>
 
       <select class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">

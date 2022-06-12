@@ -17,10 +17,13 @@ import { FooterComponent } from './footer/footer.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { ResetPasswordComponent } from './Auth/reset-password/reset-password.component';
 import { ProductosService } from './services/productos/productos.service';
+import { CategoriasComponent } from './categorias/categorias/categorias.component';
+import {DetalleComponent} from "./detalle/detalle.component"
 import { ProductosComponent } from './categorias/productos/productos.component';
 import {FiltroComponent} from "./filtro/filtro.component"
 import {FiltroState} from "./Store/Filtro/Filtro.state"
 import {FormsModule} from "@angular/forms"
+
 
 @NgModule({
   declarations: [
@@ -32,8 +35,12 @@ import {FormsModule} from "@angular/forms"
     FooterComponent,
     CarritoComponent,
     ResetPasswordComponent,
+
+    CategoriasComponent,
+    DetalleComponent
     ProductosComponent,
     FiltroComponent
+
   ],
   imports: [
     FormsModule,

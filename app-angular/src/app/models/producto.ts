@@ -6,5 +6,6 @@ export interface Producto {
     descripcion: string,
     almacenamiento: string,
     color: string,
-    stock: number
+    stock: number,
+    imagen: string
 };

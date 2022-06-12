@@ -36,6 +36,10 @@ const productoSchema = mongoose.Schema({
     stock: {
         type: Number,
         required: true
+    },
+    imagen: {
+        type: String,
+        required: true
     }
 },
 {

@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   productos:Producto[];
   productoSelect: Producto;
 
-  constructor(private store: Store, private _productoService:ProductosService) {
+  constructor(private store: Store, private _productoService: ProductosService) {
     this.carrito = this.store.select(state => state.carrito.productos);
     this.productos = [];
     this.productoSelect = this.productos[0]

@@ -193,6 +193,5 @@ const crearProducto = () => {
 
 export {
     obtenerProductos,
-    crearProducto, 
-    verDetalle
+    crearProducto
 }

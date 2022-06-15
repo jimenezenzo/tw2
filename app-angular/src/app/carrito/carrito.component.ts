@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { ItemProducto } from '../models/ItemProducto';
-import { RemoveProducto, UpdateCantidad } from '../Store/Producto/Producto.actions';
+import { RemoveProducto, UpdateCantidad } from '../Store/Carrito/Carrito.actions';
 
 @Component({
   selector: 'app-carrito',

@@ -5,7 +5,7 @@ import { LoginComponent } from './Auth/login/login.component';
 import { RegistrarComponent } from './Auth/registrar/registrar.component';
 import { ResetPasswordComponent } from './Auth/reset-password/reset-password.component';
 import { HomeComponent } from './home/home.component';
-import { ProductosComponent } from './categorias/productos/productos.component';
+import { ProductosComponent } from './productos/productos.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},

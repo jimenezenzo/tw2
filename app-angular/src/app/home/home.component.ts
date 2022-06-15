@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { ItemProducto } from '../models/ItemProducto';
 import { Producto } from '../models/producto';
 import { ProductosService } from '../services/productos/productos.service';
-import { AddProducto } from '../Store/Producto/Producto.actions';
+import { AddProducto } from '../Store/Carrito/Carrito.actions';
 
 @Component({
   selector: 'app-home',

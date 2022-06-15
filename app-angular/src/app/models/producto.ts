@@ -9,3 +9,7 @@ export interface Producto {
     stock: number,
     imagen: string
 };
+
+export interface ProductoStateModel {
+  productos: Producto[]
+}

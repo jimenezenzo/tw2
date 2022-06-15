@@ -4,9 +4,8 @@
 
             <div class="md:flex md:items-center">
                 <div class="w-full h-64 md:w-1/2 lg:h-96">
-                    <img class="h-full w-full rounded-md object-cover max-w-lg mx-auto"
-                        src="https://images.unsplash.com/photo-1578262825743-a4e402caab76?ixlib=rb-1.2.1&auto=format&fit=crop&w=1051&q=80"
-                        alt="Nike Air">
+                    <img class="h-full  rounded-md object-cover max-w-lg mx-auto"
+                        src="../../assets/img/{{productoSelect?.imagen}}">
                 </div>
                 <div class="w-full max-w-lg mx-auto mt-5 md:ml-8 md:mt-0 md:w-1/2">
                     <h3 class="text-gray-700 uppercase text-lg">{{ productoSelect?.nombre }}</h3>
@@ -31,6 +30,9 @@
                 </div>
             </div>
 
+
+
+
             <div class="mt-16">
                 <h3 class="text-gray-600 text-2xl font-medium">Celulares</h3>
                 <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6">
@@ -38,7 +40,7 @@
                     <div *ngFor="let producto of productos; index as i"
                         class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
                         <div class="flex items-end justify-end h-56 w-full bg-cover"
-                            style="background-image: url('https://images.unsplash.com/photo-1563170351-be82bc888aa4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=376&q=80')">
+                            style="background-image: url(./assets/img/{{producto.imagen}});">
                             <button
                                 class="p-2 rounded-full bg-blue-600 text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
                                 <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -53,6 +55,8 @@
                             <h3 class="text-gray-700 uppercase">{{ producto.nombre }}</h3>
                             <span class="text-gray-500 mt-2">{{ producto.precio | currency }}</span>
                         </div>
+                        <detalle-root [idProducto]="producto"></detalle-root>
+
                     </div>
 
                 </div>

@@ -7,7 +7,6 @@ import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { environment } from 'src/environments/environment';
 import { CarritoState } from './Store/Carrito/Carrito.state';
 import { HttpClientModule } from '@angular/common/http';
-
 import { InicioComponent } from './Inicio/inicio.component';
 import { LoginComponent } from './Auth/login/login.component';
 import { RegistrarComponent } from './Auth/registrar/registrar.component';
@@ -17,11 +16,13 @@ import { FooterComponent } from './footer/footer.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { ResetPasswordComponent } from './Auth/reset-password/reset-password.component';
 import { ProductosService } from './services/productos/productos.service';
-import { ProductosComponent } from './productos/productos.component';
+import {DetalleComponent} from "./detalle/detalle.component"
 import {FiltroComponent} from "./filtro/filtro.component"
 import {FiltroState} from "./Store/Filtro/Filtro.state"
 import {FormsModule} from "@angular/forms"
 import {ProductoState} from "./Store/Producto/Producto.state"
+import {ProductosComponent} from "./productos/productos.component"
+
 
 @NgModule({
   declarations: [
@@ -33,8 +34,10 @@ import {ProductoState} from "./Store/Producto/Producto.state"
     FooterComponent,
     CarritoComponent,
     ResetPasswordComponent,
+    DetalleComponent,
     ProductosComponent,
     FiltroComponent
+
   ],
   imports: [
     FormsModule,

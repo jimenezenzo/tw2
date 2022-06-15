@@ -18,7 +18,16 @@ const crearProducto = async (request, response) => {
     }
 };
 
+const buscarProductos = async (request, response) => {
+    let filtros = request.body
+    console.log(request.body)
+    const productos = await Producto.find(filtros);
+
+    return response.status(200).json(productos);
+}
+
 export {
     obtenerProductos,
-    crearProducto
+    crearProducto,
+    buscarProductos
 }

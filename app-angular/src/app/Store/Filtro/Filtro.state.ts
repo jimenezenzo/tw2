@@ -6,7 +6,6 @@ import {
   Color,
   Filtros,
   FiltroStateModel,
-  FiltroYValor,
   Marca,
   Memoria
 } from "../../models/Filtro"
@@ -63,7 +62,6 @@ export class FiltroState {
       ctx.patchState({
           filtros: filtros
       })
-
     }
 
     @Action(ResetFiltro)

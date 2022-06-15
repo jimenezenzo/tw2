@@ -8,3 +8,7 @@ export interface Producto {
     color: string,
     stock: number
 };
+
+export interface ProductoStateModel {
+  productos: Producto[]
+}

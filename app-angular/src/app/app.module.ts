@@ -5,7 +5,7 @@ import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { environment } from 'src/environments/environment';
-import { ProductoState } from './Store/Producto/Producto.state';
+import { CarritoState } from './Store/Carrito/Carrito.state';
 import { HttpClientModule } from '@angular/common/http';
 
 import { InicioComponent } from './Inicio/inicio.component';
@@ -17,10 +17,11 @@ import { FooterComponent } from './footer/footer.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { ResetPasswordComponent } from './Auth/reset-password/reset-password.component';
 import { ProductosService } from './services/productos/productos.service';
-import { ProductosComponent } from './categorias/productos/productos.component';
+import { ProductosComponent } from './productos/productos.component';
 import {FiltroComponent} from "./filtro/filtro.component"
 import {FiltroState} from "./Store/Filtro/Filtro.state"
 import {FormsModule} from "@angular/forms"
+import {ProductoState} from "./Store/Producto/Producto.state"
 
 @NgModule({
   declarations: [
@@ -40,8 +41,9 @@ import {FormsModule} from "@angular/forms"
     BrowserModule,
     AppRoutingModule,
     NgxsModule.forRoot([
-      ProductoState,
-      FiltroState
+      CarritoState,
+      FiltroState,
+      ProductoState
     ],
       { developmentMode: !environment.production }
     ),

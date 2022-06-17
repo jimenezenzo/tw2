@@ -14,6 +14,7 @@ import {ProductosService} from "../services/productos/productos.service"
 })
 export class FiltroComponent implements OnInit {
 
+  filtroAbierto: boolean = false
   filtros: Observable<Filtros>
   colorElegido = Color.TODOS
   productos: Producto[] = [];
@@ -26,7 +27,7 @@ export class FiltroComponent implements OnInit {
   marcas: Array<Marca> = [
     Marca.TODOS,
     Marca.LG,
-    Marca.IPHONE,
+    Marca.APPLE,
     Marca.SAMSUNG,
     Marca.XIAOMI,
     Marca.MOTOROLA
@@ -69,7 +70,6 @@ export class FiltroComponent implements OnInit {
   }
 
   cambiarFiltro = (filtro: 'Bateria' | 'Memoria' | 'Almacenamiento' | 'Color' | 'Marca', valor: string) => {
-    console.log(filtro, valor)
     this.store.dispatch(
       new EditarFiltro({filtro: filtro, valor: valor})
     );

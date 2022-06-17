@@ -4,6 +4,7 @@ export class Filtros {
   bateria: Bateria
   almacenamiento: Almacenamiento
   memoria: Memoria
+  busqueda: string = ''
 
   constructor(color: Color, marca: Marca, bateria: Bateria, almacenamiento: Almacenamiento, memoria: Memoria) {
     this.color = color
@@ -25,10 +26,10 @@ export const enum Color {
 export const enum Marca {
   TODOS = 'Todos',
   SAMSUNG = 'Samsung',
-  MOTOROLA = 'Motorolo',
+  MOTOROLA = 'Motorola',
   LG = 'LG',
-  XIAOMI = 'Xioami',
-  IPHONE = 'Iphone'
+  XIAOMI = 'Xiaomi',
+  APPLE = 'Apple'
 }
 
 export const enum Bateria {
@@ -52,10 +53,10 @@ export const enum Almacenamiento {
 
 export const enum Memoria {
   TODOS = 'Todos',
-  '1 gb' = '1 gb',
-  '2 gb' = '2 gb',
-  '4 gb' = '4 gb',
-  '6 gb' = '6 gb'
+  '1 gb' = '1 GB',
+  '2 gb' = '2 GB',
+  '4 gb' = '4 GB',
+  '6 gb' = '6 GB'
 }
 
 

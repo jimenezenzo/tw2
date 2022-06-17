@@ -5,6 +5,7 @@ import {EditarFiltro, ResetFiltro} from "../Store/Filtro/Filtro.actions"
 import {Almacenamiento, Bateria, Color, Filtros, Marca} from "../models/Filtro"
 import {Producto} from "../models/producto"
 import {ProductosService} from "../services/productos/productos.service"
+import {FiltrarProductos} from "../Store/Producto/Producto.actions"
 
 
 @Component({
@@ -52,17 +53,12 @@ export class FiltroComponent implements OnInit {
 
   constructor(private store: Store, private _productoService: ProductosService) {
     this.filtros = this.store.select(state => state.filtros.filtros)
-    this.filtros.subscribe( filtro => console.log(filtro.color))
   }
 
   ngOnInit(): void {
     this._productoService.getAllProducts().subscribe(data => {
       this.productos = data;
     });
-  }
-
-  filtroColor = () => {
-    return this.filtros.subscribe( filtros => this.colorElegido = filtros.color)
   }
 
   resetearFiltro = () => {
@@ -73,5 +69,8 @@ export class FiltroComponent implements OnInit {
     this.store.dispatch(
       new EditarFiltro({filtro: filtro, valor: valor})
     );
+    this.filtros.subscribe(fil =>
+      this.store.dispatch(new FiltrarProductos(fil))
+    )
   }
 }

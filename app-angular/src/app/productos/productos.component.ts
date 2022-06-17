@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Producto } from 'src/app/models/producto';
 import { ProductosService } from 'src/app/services/productos/productos.service';
-import {debounceTime, Observable, of, Subject, Subscription} from "rxjs"
+import {debounceTime, Observable, Subject, Subscription} from "rxjs"
 import {Store} from "@ngxs/store"
 
 @Component({
@@ -18,7 +18,6 @@ export class ProductosComponent implements OnInit {
 
   constructor(private _productoService: ProductosService, private store: Store) {
     store.subscribe( store => {
-        console.log(store.productos.productos)
         this.productos = new Observable<Producto[]>(subscriber => subscriber.next(store.productos.productos))
       })
   }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Producto } from "../../models/producto";
+import {Filtros} from "../../models/Filtro"
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,6 @@ export class ProductosService {
     return this.httpCliente.get<Producto[]>('http://localhost:4000/api/productos')
   }
 
-<<<<<<< Updated upstream
-=======
   getProductosFiltrados(filtros: Filtros){
     let filtrosParaEnviar: Map<string, any> = new Map()
 
@@ -34,5 +33,4 @@ export class ProductosService {
         Object.fromEntries(filtrosParaEnviar)
       )
   }
->>>>>>> Stashed changes
 }

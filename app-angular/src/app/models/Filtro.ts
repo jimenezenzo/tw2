@@ -13,8 +13,9 @@ export class Filtros {
     this.almacenamiento = almacenamiento
     this.memoria = memoria
   }
-}
 
+  [key: string]: string
+}
 
 export const enum Color {
   TODOS = 'Todos',
@@ -58,7 +59,6 @@ export const enum Memoria {
   '4 gb' = '4 GB',
   '6 gb' = '6 GB'
 }
-
 
 export interface FiltroStateModel {
     filtros: Filtros

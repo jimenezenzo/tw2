@@ -6,13 +6,15 @@ import { RegistrarComponent } from './Auth/registrar/registrar.component';
 import { ResetPasswordComponent } from './Auth/reset-password/reset-password.component';
 import { HomeComponent } from './home/home.component';
 import { ProductosComponent } from './productos/productos.component';
+import {ConfirmarCuentaComponent} from "./Auth/confirmarCuenta/confirmarCuenta.component"
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'registrarme', component: RegistrarComponent},
   { path: 'login', component: LoginComponent},
   { path: 'recuperar-password', component: ResetPasswordComponent},
-  { path: 'productos', component: ProductosComponent}
+  { path: 'productos', component: ProductosComponent},
+  { path: 'confirmar-cuenta', component: ConfirmarCuentaComponent}
 ];
 
 @NgModule({

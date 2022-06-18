@@ -10,20 +10,10 @@
 
       <!-- Card Title -->
       <h2 class="text-center font-semibold text-3xl lg:text-4xl text-gray-800">
-        Registrarme
+        Confirmar cuenta
       </h2>
 
-      <form (submit)="registrarse(formulario)" #formulario="ngForm" class="mt-10" ngNativeValidate>
-        <!-- Nombre Input -->
-        <label for="nombre" class="block text-xs font-semibold text-gray-600 uppercase">Nombre</label>
-        <input id="nombre" type="text" name="nombre" [(ngModel)]="nombre" autocomplete="nombre"
-               class="block w-full py-3 px-1 mt-2
-                text-gray-800 appearance-none
-                border-b-2 border-gray-100
-                focus:text-gray-500 focus:outline-none focus:border-gray-200"
-                required
-        />
-
+      <form (submit)="confirmarUsuario(formulario)" #formulario="ngForm" class="mt-10" ngNativeValidate>
         <!-- Email Input -->
         <label for="email" class="mt-2 block text-xs font-semibold text-gray-600 uppercase">E-mail</label>
         <input id="email" type="email" name="email" [(ngModel)]="email" autocomplete="email"
@@ -34,8 +24,8 @@
                required/>
 
         <!-- Password Input -->
-        <label for="password" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Password</label>
-        <input id="password" type="password" name="password" [(ngModel)]="password" autocomplete="current-password"
+        <label for="codigo" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Codigo</label>
+        <input id="codigo" type="text" name="codigo" [(ngModel)]="codigo" autocomplete="current-codigo"
                class="block w-full py-3 px-1 mt-2 mb-4
                   text-gray-800 appearance-none
                   border-b-2 border-gray-100
@@ -45,26 +35,19 @@
         <!-- Auth Buttton -->
         <button type="submit"
                 [disabled]="cargando"
-                class="w-full py-3 mt-10 bg-gray-800 rounded-sm
+                class="w-full py-3 mt-5 bg-gray-800 rounded-sm
                   font-medium text-white uppercase
                   focus:outline-none hover:bg-gray-700 hover:shadow-none"
                 [ngClass]="{'cursor-not-allowed': cargando}">
-          Registrar
+          Confirmar usuario
         </button>
-        <p *ngIf="mostrarCreacion" class="p-2 mt-2 bg-green-500">
-          Se creo el usuario correctamente. Enviamos un email a su cuenta de correo con el codigo de confirmación.
+        <p *ngIf="mostrarConfirmacion" class="p-2 mt-2 bg-green-500">
+          Se confirmo correctamente el usuario.
         </p>
 
         <p *ngIf="mostrarError" class="p-2 mt-2 bg-red-500">
           {{error}}
         </p>
-
-        <!-- Another Auth Routes -->
-        <div class="sm:flex sm:flex-wrap mt-8 sm:mb-4 text-sm text-center">
-          <a routerLink="/login" class="flex-2 underline">
-            Ya estoy registrado
-          </a>
-        </div>
       </form>
     </div>
   </div>

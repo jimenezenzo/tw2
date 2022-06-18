@@ -5,7 +5,8 @@ import {CognitoUserAttribute, CognitoUserPool} from "amazon-cognito-identity-js"
 
 enum ErroresCreacionUsuarios {
   InvalidPasswordException = ('InvalidPasswordException'),
-  InvalidParameterException = ('InvalidParameterException')
+  InvalidParameterException = ('InvalidParameterException'),
+  UsernameExistsException = ('UsernameExistsException')
 }
 
 interface IForm {
@@ -25,6 +26,7 @@ export class RegistrarComponent implements OnInit {
   nombre: string = ''
   email: string = ''
   password: string = ''
+  direccion: string = ''
 
   mostrarCreacion: boolean = false
   mostrarError: boolean = false
@@ -48,6 +50,7 @@ export class RegistrarComponent implements OnInit {
       let datosDelForm: IForm = {
         "name": this.nombre,
         "email": this.email,
+        "address": this.direccion
       }
 
       for (let key in datosDelForm) {
@@ -71,7 +74,9 @@ export class RegistrarComponent implements OnInit {
             this.error = 'El password debe tener al menos 8 caracteres, 1 caracter especial y una mayuscula.'
           }
           else if (err.name === ErroresCreacionUsuarios.InvalidParameterException.toString()) {
-            this.error = 'Se ingreso un email invalido'
+            this.error = 'Se ingreso un email invalido o falto completar algun dato en el formulario.'
+          } else if (err.name === ErroresCreacionUsuarios.UsernameExistsException.toString()) {
+            this.error = 'Ya existe un usuario registrado con ese Email'
           } else {
             this.error = err.message || JSON.stringify(err)
           }

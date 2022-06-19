@@ -5,6 +5,7 @@ import { ItemProducto } from '../models/ItemProducto';
 import { Producto } from '../models/producto';
 import { ProductosService } from '../services/productos/productos.service';
 import { AddProducto } from '../Store/Carrito/Carrito.actions';
+import {AuthService} from "../services/auth/auth.service"
 
 @Component({
   selector: 'app-home',

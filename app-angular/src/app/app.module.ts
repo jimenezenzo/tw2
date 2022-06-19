@@ -22,7 +22,9 @@ import {FiltroState} from "./Store/Filtro/Filtro.state"
 import {FormsModule} from "@angular/forms"
 import {ProductoState} from "./Store/Producto/Producto.state"
 import {ProductosComponent} from "./productos/productos.component"
-import {ConfirmarCuentaComponent} from "./Auth/confirmarCuenta/confirmarCuenta.component"
+import {ConfirmarCuentaComponent} from "./Auth/confirmar-cuenta/confirmarCuenta.component"
+import {AuthService} from "./services/auth/auth.service"
+import {AuthState} from "./Store/Auth/Auth.state"
 
 
 @NgModule({
@@ -38,7 +40,7 @@ import {ConfirmarCuentaComponent} from "./Auth/confirmarCuenta/confirmarCuenta.c
     DetalleComponent,
     ProductosComponent,
     FiltroComponent,
-    ConfirmarCuentaComponent
+    ConfirmarCuentaComponent,
   ],
   imports: [
     FormsModule,
@@ -47,7 +49,8 @@ import {ConfirmarCuentaComponent} from "./Auth/confirmarCuenta/confirmarCuenta.c
     NgxsModule.forRoot([
       CarritoState,
       FiltroState,
-      ProductoState
+      ProductoState,
+      AuthState
     ],
       { developmentMode: !environment.production }
     ),
@@ -59,7 +62,10 @@ import {ConfirmarCuentaComponent} from "./Auth/confirmarCuenta/confirmarCuenta.c
     }),
     HttpClientModule
   ],
-  providers: [ProductosService],
+  providers: [
+    ProductosService,
+    AuthService,
+  ],
   bootstrap: [InicioComponent]
 })
 export class AppModule { }

@@ -1,6 +1,6 @@
 export class LoguearUsuario {
     static readonly type = '[USUARIO] Log';
-    constructor(public nombre: string) {}
+    constructor(public nombre: string, public email: string) {}
 }
 
 export class LogoutUsuario {

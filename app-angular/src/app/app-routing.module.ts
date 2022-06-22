@@ -8,6 +8,8 @@ import { HomeComponent } from './home/home.component';
 import { ProductosComponent } from './productos/productos.component';
 import {ConfirmarCuentaComponent} from "./Auth/confirmar-cuenta/confirmarCuenta.component"
 import {LoginGuard} from "./guards/login.guard"
+import { ListadoCompraComponent } from './listado-compra/listado-compra.component'
+import { AuthGuardGuard } from './guards/auth-guard.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -16,6 +18,7 @@ const routes: Routes = [
   { path: 'recuperar-password', component: ResetPasswordComponent},
   { path: 'productos', component: ProductosComponent},
   { path: 'confirmar-cuenta', component: ConfirmarCuentaComponent},
+  { path: 'listado-compra', component: ListadoCompraComponent, canActivate: [AuthGuardGuard]}
 ];
 
 @NgModule({

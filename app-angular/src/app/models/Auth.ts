@@ -1,5 +1,6 @@
 interface IUsuario {
-  nombre: string | null
+  nombre: string | null,
+  email: string,
   logueado: boolean
 }
 

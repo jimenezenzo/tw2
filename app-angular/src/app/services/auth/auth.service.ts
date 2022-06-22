@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core'
 import {CognitoUserAttribute, CognitoUserPool} from "amazon-cognito-identity-js"
 import {environment} from "../../../environments/environment"
 import {from, Observable} from "rxjs"
+import { AuthStateModel } from 'src/app/models/Auth'
 
 @Injectable({
   providedIn: 'root'
@@ -62,6 +63,38 @@ export class AuthService {
     }
 
     return from(getNombre() as Promise<string>)
+  }
+
+  getUsuarioActual(): Observable<string[]> {
+    var userPool = new CognitoUserPool(this.poolData)
+    var usuarioActual = userPool.getCurrentUser()
+
+    var getUser = () => {
+      return new Promise((resolve, reject) => {
+        if (usuarioActual != null) {
+          usuarioActual.getSession((err: any, session: any) => {
+            if (err) {
+              reject(err.message)
+            }
+
+            usuarioActual?.getUserAttributes((err: Error | undefined, result: CognitoUserAttribute[] | undefined) => {
+              if (err) {
+                reject(err.message)
+              }
+
+              let atributos = result?.filter(d => ['name', 'email'].includes(d.Name))
+
+              resolve(atributos?.map(d => d.Value));
+            })
+          })
+
+        } else {
+          reject('Error')
+        }
+      })
+    }
+
+    return from(getUser() as Promise<string[]>)
   }
 
   getToken(): string {

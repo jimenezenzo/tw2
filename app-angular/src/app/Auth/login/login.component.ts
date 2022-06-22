@@ -56,9 +56,10 @@ export class LoginComponent implements OnInit {
       var cognitoUser = new CognitoUser(userData)
       cognitoUser.authenticateUser(authenticationDetails, {
         onSuccess: (result) => {
-          this.authService.getNombreUsuarioActual().subscribe(
-            valor => {
-              this.store.dispatch(new LoguearUsuario(valor))
+          this.authService.getUsuarioActual().subscribe(
+            userDato => {
+              console.log('login: ', userDato)
+              this.store.dispatch(new LoguearUsuario(userDato[0], userDato[1]))
               this.router.navigate(['/'])
             }
           )

@@ -17,10 +17,11 @@ export class AuthState {
     }
 
     @Action(LoguearUsuario)
-    loguearUsuario(ctx: StateContext<AuthStateModel>, {nombre}: LoguearUsuario) {
+    loguearUsuario(ctx: StateContext<AuthStateModel>, {nombre, email}: LoguearUsuario) {
       ctx.patchState({
           usuario: {
             nombre: nombre,
+            email: email,
             logueado: true
           }
       })

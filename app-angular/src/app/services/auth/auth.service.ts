@@ -65,41 +65,37 @@ export class AuthService {
     return from(getNombre() as Promise<string>)
   }
 
-  // getUsuarioActual(): Observable<AuthStateModel> {
-  //   var userPool = new CognitoUserPool(this.poolData)
-  //   var usuarioActual = userPool.getCurrentUser()
+  getUsuarioActual(): Observable<string[]> {
+    var userPool = new CognitoUserPool(this.poolData)
+    var usuarioActual = userPool.getCurrentUser()
 
-  //   var getUser = () => {
-  //     return new Promise((resolve, reject) => {
-  //       if (usuarioActual != null) {
-  //         usuarioActual.getSession((err: any, session: any) => {
-  //           if (err) {
-  //             console.log(err.message || JSON.stringify(err))
-  //             reject('')
-  //           }
+    var getUser = () => {
+      return new Promise((resolve, reject) => {
+        if (usuarioActual != null) {
+          usuarioActual.getSession((err: any, session: any) => {
+            if (err) {
+              reject(err.message)
+            }
 
-  //           usuarioActual?.getUserAttributes((err: Error | undefined, result: CognitoUserAttribute[] | undefined) => {
-  //             if (err) {
-  //               console.log(err.message || JSON.stringify(err))
-  //               reject('')
-  //             }
+            usuarioActual?.getUserAttributes((err: Error | undefined, result: CognitoUserAttribute[] | undefined) => {
+              if (err) {
+                reject(err.message)
+              }
 
-  //             resolve(new AuthStateModel({usuario: {
+              let atributos = result?.filter(d => ['name', 'email'].includes(d.Name))
 
-  //             }}) ?? [])
+              resolve(atributos?.map(d => d.Value));
+            })
+          })
 
-  //             //resolve(atributosUsuario.find(atributo => atributo.Name == 'name')?.Value ?? '')
-  //           })
-  //         })
+        } else {
+          reject('Error')
+        }
+      })
+    }
 
-  //       } else {
-  //         reject('')
-  //       }
-  //     })
-  //   }
-
-  //   return from(getUser() as Promise<AuthStateModel>)
-  // }
+    return from(getUser() as Promise<string[]>)
+  }
 
   getToken(): string {
     for (let i = 0; i < localStorage.length; i++) {

@@ -37,8 +37,8 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.authService.estaLogueado()) {
-      this.authService.getNombreUsuarioActual().subscribe( valor =>
-        this.store.dispatch(new LoguearUsuario(valor))
+      this.authService.getUsuarioActual().subscribe( valor =>
+        this.store.dispatch(new LoguearUsuario(valor[0], valor[1]))
       )
     }
   }

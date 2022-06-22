@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { ItemProducto } from '../models/ItemProducto';
+import { RemoveProducto } from '../Store/Carrito/Carrito.actions';
 
 @Component({
   selector: 'app-listado-compra',
@@ -17,6 +18,10 @@ export class ListadoCompraComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  public removeProducto(id: string) {
+    this.store.dispatch(new RemoveProducto(id));
   }
 
 }

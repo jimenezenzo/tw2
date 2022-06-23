@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
 
   carrito: Observable<ItemProducto[]>;
   productos:Producto[];
+  productosCarrito: Producto[] = [];
   productoSelect: Producto;
   slider:any;
   defaultTransform:any;
@@ -34,8 +35,14 @@ export class HomeComponent implements OnInit {
     this._productoService.getAllProducts().subscribe(data => {
       this.productos = data;
       this.productoSelect = data[0]
+      this.productosCarrito = this.randomsArray(data);
+
+      console.log(this.productosCarrito)
     });
   }
+
+    
+
 
   public addProducto(producto: Producto, cantidad: number){
     this.store.dispatch(new AddProducto({producto, cantidad}))
@@ -53,8 +60,14 @@ export class HomeComponent implements OnInit {
     this.slider.style.transform = "translateX(" + this.defaultTransform + "px)";
   }
 
-
+  randomsArray(lista: Producto[]): any {
+    return [...lista]
+                .sort(() => Math.random() > 0.5 ? 1 : -1)
+                .slice(0,6)
+  }
+  
  
 }
+
 
 

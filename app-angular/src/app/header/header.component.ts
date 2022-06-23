@@ -6,6 +6,7 @@ import {CognitoUserAttribute, CognitoUserPool, CognitoUserSession} from "amazon-
 import {Router} from "@angular/router"
 import {LogoutUsuario, LoguearUsuario} from "../Store/Auth/Auth.actions"
 import {AuthService} from "../services/auth/auth.service"
+import {MostrarTodos} from "../Store/Producto/Producto.actions"
 
 @Component({
   selector: 'app-header',
@@ -26,6 +27,7 @@ export class HeaderComponent implements OnInit {
   logueado: Observable<boolean> = new Observable<boolean>(subscriber => subscriber.next(false))
 
   constructor(private store: Store, private router: Router, private authService: AuthService) {
+    store.dispatch(new MostrarTodos())
     this.store.select(state => state.carrito.productos).subscribe(p => {
       this.cantidadCarrito = p.length
     })

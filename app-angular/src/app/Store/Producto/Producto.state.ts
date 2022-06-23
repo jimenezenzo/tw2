@@ -40,12 +40,10 @@ export class ProductoState {
     const state = ctx.getState()
     let productos: Producto[] = state.productos
 
-    this._productoService.getAllProducts().subscribe(productosFiltrados =>
-      productos = [...productos, ...productosFiltrados]
-    )
-
-    ctx.patchState({
-      productos: productos
+    this._productoService.getAllProducts().subscribe(productosFiltrados => {
+      ctx.patchState({
+        productos: [...productos, ...productosFiltrados]
+      })
     })
   }
 }

@@ -3,6 +3,7 @@ import { Producto } from 'src/app/models/producto';
 import { ProductosService } from 'src/app/services/productos/productos.service';
 import {debounceTime, Observable, Subject, Subscription} from "rxjs"
 import {Store} from "@ngxs/store"
+import {AddProducto} from "../Store/Carrito/Carrito.actions"
 
 @Component({
   selector: 'app-productos',
@@ -18,8 +19,8 @@ export class ProductosComponent implements OnInit {
 
   constructor(private _productoService: ProductosService, private store: Store) {
     store.subscribe( store => {
-        this.productos = new Observable<Producto[]>(subscriber => subscriber.next(store.productos.productos))
-      })
+      this.productos = new Observable<Producto[]>(subscriber => subscriber.next(store.productos.productos))
+    })
   }
 
   ngOnInit(): void {
@@ -41,5 +42,9 @@ export class ProductosComponent implements OnInit {
 
   buscar(busqueda: string) {
     this.cambioDeValor.next(busqueda)
+  }
+
+  public addProducto(producto: Producto, cantidad: number){
+    this.store.dispatch(new AddProducto({producto, cantidad}))
   }
 }

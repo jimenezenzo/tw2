@@ -23,8 +23,8 @@ export class CarritoState {
       const state = ctx.getState();
       const productos = state.productos;
 
-      if(productos.some(p => p.producto.id == itemProducto.producto.id)){
-        this.updateCantidad(ctx, new UpdateCantidad(itemProducto.producto.id, itemProducto.cantidad))
+      if(productos.some(p => p.producto._id == itemProducto.producto._id)){
+        this.updateCantidad(ctx, new UpdateCantidad(itemProducto.producto._id, itemProducto.cantidad))
       }
       else{
         ctx.patchState({
@@ -39,7 +39,7 @@ export class CarritoState {
         const state = ctx.getState();
 
         ctx.patchState({
-            productos: state.productos.filter(p => p.producto.id !== id)
+            productos: state.productos.filter(p => p.producto._id !== id)
         });
     }
 
@@ -50,7 +50,7 @@ export class CarritoState {
 
         ctx.patchState({
             productos: state.productos.map( p => {
-                if((p.producto.id == id) && !(p.cantidad + cant < 1)) p = { ...p, cantidad: p.cantidad + cant }
+                if((p.producto._id == id) && !(p.cantidad + cant < 1)) p = { ...p, cantidad: p.cantidad + cant }
                 return p
             })
         });

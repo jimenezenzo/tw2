@@ -1,5 +1,5 @@
 export interface Producto {
-    id: string,
+    _id: string,
     nombre: string,
     categoria: string,
     precio: number,
@@ -8,6 +8,7 @@ export interface Producto {
     color: string,
     stock: number,
     imagen: string
+    bateria: string
 };
 
 export interface ProductoStateModel {

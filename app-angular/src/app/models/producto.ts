@@ -7,7 +7,8 @@ export interface Producto {
     almacenamiento: string,
     color: string,
     stock: number,
-    imagen: string
+    imagen: string,
+    bateria : string,
 };
 
 export interface ProductoStateModel {

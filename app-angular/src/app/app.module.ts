@@ -5,9 +5,8 @@ import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { environment } from 'src/environments/environment';
-import { ProductoState } from './Store/Producto/Producto.state';
+import { CarritoState } from './Store/Carrito/Carrito.state';
 import { HttpClientModule } from '@angular/common/http';
-
 import { InicioComponent } from './Inicio/inicio.component';
 import { LoginComponent } from './Auth/login/login.component';
 import { RegistrarComponent } from './Auth/registrar/registrar.component';
@@ -17,8 +16,17 @@ import { FooterComponent } from './footer/footer.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { ResetPasswordComponent } from './Auth/reset-password/reset-password.component';
 import { ProductosService } from './services/productos/productos.service';
-import { CategoriasComponent } from './categorias/categorias/categorias.component';
+import {DetalleComponent} from "./detalle/detalle.component"
 import {FiltroComponent} from "./filtro/filtro.component"
+import {FiltroState} from "./Store/Filtro/Filtro.state"
+import {FormsModule} from "@angular/forms"
+import {ProductoState} from "./Store/Producto/Producto.state"
+import {ProductosComponent} from "./productos/productos.component"
+import {ConfirmarCuentaComponent} from "./Auth/confirmar-cuenta/confirmarCuenta.component"
+import {AuthService} from "./services/auth/auth.service"
+import {AuthState} from "./Store/Auth/Auth.state";
+import { ListadoCompraComponent } from './listado-compra/listado-compra.component'
+
 
 @NgModule({
   declarations: [
@@ -30,14 +38,21 @@ import {FiltroComponent} from "./filtro/filtro.component"
     FooterComponent,
     CarritoComponent,
     ResetPasswordComponent,
-    CategoriasComponent,
-    FiltroComponent
+    DetalleComponent,
+    ProductosComponent,
+    FiltroComponent,
+    ConfirmarCuentaComponent,
+    ListadoCompraComponent,
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     NgxsModule.forRoot([
-      ProductoState
+      CarritoState,
+      FiltroState,
+      ProductoState,
+      AuthState
     ],
       { developmentMode: !environment.production }
     ),
@@ -49,7 +64,10 @@ import {FiltroComponent} from "./filtro/filtro.component"
     }),
     HttpClientModule
   ],
-  providers: [ProductosService],
+  providers: [
+    ProductosService,
+    AuthService,
+  ],
   bootstrap: [InicioComponent]
 })
 export class AppModule { }

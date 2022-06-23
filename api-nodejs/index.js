@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import router from "./routes/api.js";
 import cors from "cors";
 import corsOptionsDelegate from "./config/cors.js";
+import Producto from "./models/Producto.js";
 
 const app = express();
 

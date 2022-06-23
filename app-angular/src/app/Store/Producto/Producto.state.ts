@@ -1,58 +1,49 @@
-import { State, Action, StateContext, Selector } from '@ngxs/store';
-import { Injectable } from '@angular/core';
-import { AddProducto, RemoveProducto, UpdateCantidad } from './Producto.actions';
-import { CarritoStateModel } from '../../models/Carrito'
+import {Action, Selector, State, StateContext} from "@ngxs/store"
+import {Injectable} from "@angular/core"
+import {Producto, ProductoStateModel} from "../../models/producto"
+import {FiltrarProductos, MostrarTodos} from "./Producto.actions"
+import {ProductosService} from "../../services/productos/productos.service"
 
 @State({
-    name: 'carrito',
-    defaults: {
-      productos: []
-    }
-  })
+  name: 'productos',
+  defaults: {
+    productos: []
+  }
+})
 @Injectable()
 export class ProductoState {
-    // Obtiene todos los productos del estado
-    @Selector()
-    static getProductos(state: CarritoStateModel) {
-        return state.productos
-    }
-  
-    // Añade un nuevo producto al estado
-    @Action(AddProducto)
-    addProducto(ctx: StateContext<CarritoStateModel>,  {itemProducto}: AddProducto) {
-      const state = ctx.getState();
-      const productos = state.productos;
-        
-      if(productos.some(p => p.producto.id == itemProducto.producto.id)){
-        this.updateCantidad(ctx, new UpdateCantidad(itemProducto.producto.id, itemProducto.cantidad))
-      }
-      else{
-        ctx.patchState({
-            productos: [...productos, itemProducto]
-        })
-      }
-    }
 
-    // Elimina un producto del estado
-    @Action(RemoveProducto)
-    removeProducto(ctx: StateContext<CarritoStateModel>, {id}: RemoveProducto) {
-        const state = ctx.getState();
+  constructor(private _productoService: ProductosService) {
+  }
 
-        ctx.patchState({
-            productos: state.productos.filter(p => p.producto.id !== id)
-        });
-    }
+  @Selector()
+  static getProductos(state: ProductoStateModel) {
+    return state.productos
+  }
 
-    // Actualizar la cantidad de un producto del estado
-    @Action(UpdateCantidad)
-    updateCantidad(ctx: StateContext<CarritoStateModel>, {id, cant}: UpdateCantidad) {
-        const state = ctx.getState();
+  @Action(FiltrarProductos)
+  filtrarProductos(
+    ctx: StateContext<ProductoStateModel>,
+    {filtros}: FiltrarProductos
+  ) {
+    const state = ctx.getState()
 
-        ctx.patchState({
-            productos: state.productos.map( p => {
-                if((p.producto.id == id) && !(p.cantidad + cant < 1)) p = { ...p, cantidad: p.cantidad + cant }
-                return p
-            })
-        });
-    }
+    this._productoService.getProductosFiltrados(filtros).subscribe(productosFiltrados =>
+      ctx.patchState({
+        productos: productosFiltrados
+      })
+    )
+  }
+
+  @Action(MostrarTodos)
+  mostrarTodos(ctx: StateContext<ProductoStateModel>) {
+    const state = ctx.getState()
+    let productos: Producto[] = state.productos
+
+    this._productoService.getAllProducts().subscribe(productosFiltrados => {
+      ctx.patchState({
+        productos: [...productos, ...productosFiltrados]
+      })
+    })
+  }
 }

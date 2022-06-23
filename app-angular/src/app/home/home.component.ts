@@ -4,7 +4,8 @@ import { Observable } from 'rxjs';
 import { ItemProducto } from '../models/ItemProducto';
 import { Producto } from '../models/producto';
 import { ProductosService } from '../services/productos/productos.service';
-import { AddProducto } from '../Store/Producto/Producto.actions';
+import { AddProducto } from '../Store/Carrito/Carrito.actions';
+import {AuthService} from "../services/auth/auth.service"
 
 @Component({
   selector: 'app-home',
@@ -22,7 +23,7 @@ export class HomeComponent implements OnInit {
 
   
 
-  constructor(private store: Store, private _productoService:ProductosService) {
+  constructor(private store: Store, private _productoService: ProductosService) {
     this.carrito = this.store.select(state => state.carrito.productos);
     this.productos = [];
     this.productoSelect = this.productos[0]

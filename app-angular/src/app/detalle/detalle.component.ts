@@ -14,10 +14,15 @@ export class DetalleComponent {
   producto: Producto | undefined = undefined;
   showModal = false;
 
-  constructor() {
+  constructor(private store: Store) {
   }
 
   toggleModal(){
     this.showModal = !this.showModal;
+  }
+
+  agregarAlCarrito = (producto: Producto, cantidad: number) => {
+    this.store.dispatch(new AddProducto({producto, cantidad}))
+    this.toggleModal()
   }
 }

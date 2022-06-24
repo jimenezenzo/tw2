@@ -6,16 +6,15 @@
                 <h3 class="text-sm text-gray-900">{{ producto.producto.nombre }}</h3>
                 <h4 class="text-sm text-gray-400">{{ producto.producto.categoria }}</h4>
                 <div class="flex items-center mt-2">
-                    <button class="text-gray-500 focus:outline-none focus:text-gray-600"
-                        (click)="updateCantidad(producto.producto._id, -1)">
+
+                    <button class="text-gray-500 focus:outline-none focus:text-gray-600" (click)="updateCantidad(producto.producto._id, -1)">
                         <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             viewBox="0 0 24 24" stroke="currentColor">
                             <path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
                     </button>
                     <span class="text-gray-700 mx-2">{{ producto.cantidad }}</span>
-                    <button class="text-gray-500 focus:outline-none focus:text-gray-600"
-                        (click)="updateCantidad(producto.producto._id, 1)">
+                    <button class="text-gray-500 focus:outline-none focus:text-gray-600" (click)="updateCantidad(producto.producto._id, 1)">
                         <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             viewBox="0 0 24 24" stroke="currentColor">
                             <path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -33,11 +32,9 @@
         </div>
     </div>
 
-    <a class="flex items-center justify-center mt-4 px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
-        routerLink="/listado-compra">
+    <a class="flex items-center justify-center mt-4 px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500" routerLink="/listado-compra">
         <span>Comprar</span>
-        <svg class="h-5 w-5 mx-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            viewBox="0 0 24 24" stroke="currentColor">
+        <svg class="h-5 w-5 mx-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
             <path d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
         </svg>
     </a>

@@ -6,7 +6,8 @@ import { CarritoStateModel } from '../../models/Carrito'
 @State({
     name: 'carrito',
     defaults: {
-      productos: []
+      productos: [],
+      carritoAbierto: false
     }
   })
 @Injectable()
@@ -28,7 +29,8 @@ export class CarritoState {
       }
       else{
         ctx.patchState({
-            productos: [...productos, itemProducto]
+            productos: [...productos, itemProducto],
+            carritoAbierto: true
         })
       }
     }
@@ -39,7 +41,8 @@ export class CarritoState {
         const state = ctx.getState();
 
         ctx.patchState({
-            productos: state.productos.filter(p => p.producto._id !== id)
+            productos: state.productos.filter(p => p.producto._id !== id),
+            carritoAbierto: true
         });
     }
 
@@ -52,7 +55,8 @@ export class CarritoState {
             productos: state.productos.map( p => {
                 if((p.producto._id == id) && !(p.cantidad + cant < 1)) p = { ...p, cantidad: p.cantidad + cant }
                 return p
-            })
+            }),
+            carritoAbierto: true
         });
     }
 }

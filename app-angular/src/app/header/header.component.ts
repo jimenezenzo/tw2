@@ -15,7 +15,7 @@ import {MostrarTodos} from "../Store/Producto/Producto.actions"
 })
 export class HeaderComponent implements OnInit {
 
-  cartOpen = false
+  cartOpen: boolean = false
   isOpen = false
   cantidadCarrito: number = 0
   poolData = {
@@ -35,6 +35,9 @@ export class HeaderComponent implements OnInit {
       this.nombre = new Observable<string>(subscriber => subscriber.next(state.auth.usuario?.nombre ?? ''))
       this.logueado = new Observable<boolean>(subscriber => subscriber.next(state.auth.usuario?.logueado ?? false))
     })
+    this.store.subscribe(state => {
+      this.cartOpen = state.carrito.carritoAbierto
+    })
   }
 
   ngOnInit(): void {
@@ -43,6 +46,10 @@ export class HeaderComponent implements OnInit {
         this.store.dispatch(new LoguearUsuario(valor[0], valor[1]))
       )
     }
+  }
+
+  cambiarEstadoCarrito = () => {
+
   }
 
   logout() {

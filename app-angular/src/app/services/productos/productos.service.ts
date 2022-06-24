@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Producto } from "../../models/producto";
 import {Filtros} from "../../models/Filtro"
+import { ItemProducto } from 'src/app/models/ItemProducto';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
   providedIn: 'root'
@@ -32,5 +34,9 @@ export class ProductosService {
     'http://localhost:4000/api/buscar-productos',
         Object.fromEntries(filtrosParaEnviar)
       )
+  }
+
+  realizarPago(items: {title: string, category_id: string, quantity: number, unit_price: number}[]){
+    return this.httpCliente.post('http://localhost:4000/api/payment', {items: items})
   }
 }

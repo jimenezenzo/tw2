@@ -25,7 +25,8 @@ import {ProductosComponent} from "./productos/productos.component"
 import {ConfirmarCuentaComponent} from "./Auth/confirmar-cuenta/confirmarCuenta.component"
 import {AuthService} from "./services/auth/auth.service"
 import {AuthState} from "./Store/Auth/Auth.state";
-import { ListadoCompraComponent } from './listado-compra/listado-compra.component'
+import { ListadoCompraComponent } from './listado-compra/listado-compra.component';
+import { EstadoCompraComponent } from './estado-compra/estado-compra.component'
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { ListadoCompraComponent } from './listado-compra/listado-compra.componen
     FiltroComponent,
     ConfirmarCuentaComponent,
     ListadoCompraComponent,
+    EstadoCompraComponent,
   ],
   imports: [
     FormsModule,

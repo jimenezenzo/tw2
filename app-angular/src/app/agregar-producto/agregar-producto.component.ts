@@ -11,7 +11,7 @@ import { empty } from 'rxjs';
 export class AgregarProductoComponent implements OnInit {
 
   detallesProducto: Producto = {
-    id : "0",
+    _id : "0",
     nombre : "",
     categoria: "",
     precio : 0,

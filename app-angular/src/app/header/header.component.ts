@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit {
   constructor(private store: Store, private router: Router, private authService: AuthService) {
     store.dispatch(new MostrarTodos())
     this.store.select(state => state.carrito.productos).subscribe(p => {
-      this.cantidadCarrito = p.length
+      this.cantidadCarrito = this.calcularCantidadDeProductos(p)
     })
     this.store.subscribe(state => {
       this.nombre = new Observable<string>(subscriber => subscriber.next(state.auth.usuario?.nombre ?? ''))
@@ -48,8 +48,10 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  cambiarEstadoCarrito = () => {
-
+  private calcularCantidadDeProductos = (productos: Array<{producto: any, cantidad: number}>) => {
+    return productos.reduce((contador, valorActual) => {
+      return contador + valorActual.cantidad
+    }, 0)
   }
 
   logout() {

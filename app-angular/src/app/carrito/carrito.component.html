@@ -7,7 +7,7 @@
                 <h4 class="text-sm text-gray-400">{{ producto.producto.categoria }}</h4>
                 <div class="flex items-center mt-2">
                     <button class="text-gray-500 focus:outline-none focus:text-gray-600"
-                        (click)="updateCantidad(producto.producto.id, -1)">
+                        (click)="updateCantidad(producto.producto._id, -1)">
                         <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             viewBox="0 0 24 24" stroke="currentColor">
                             <path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -15,7 +15,7 @@
                     </button>
                     <span class="text-gray-700 mx-2">{{ producto.cantidad }}</span>
                     <button class="text-gray-500 focus:outline-none focus:text-gray-600"
-                        (click)="updateCantidad(producto.producto.id, 1)">
+                        (click)="updateCantidad(producto.producto._id, 1)">
                         <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             viewBox="0 0 24 24" stroke="currentColor">
                             <path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -24,7 +24,7 @@
                 </div>
                 <p class="text-gray-600">{{ (producto.producto.precio * producto.cantidad) | currency }}</p>
             </div>
-            <button class="text-gray-600 focus:outline-none" (click)="removeProducto(producto.producto.id)">
+            <button class="text-gray-600 focus:outline-none" (click)="removeProducto(producto.producto._id)">
                 <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     viewBox="0 0 24 24" stroke="currentColor">
                     <path d="M6 18L18 6M6 6l12 12"></path>

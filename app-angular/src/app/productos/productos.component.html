@@ -21,6 +21,7 @@
             <div class="flex items-end justify-end h-56 w-full bg-cover"
             style="background-image: url(./assets/img/{{producto.imagen}});">
             <button
+                (click)="addProducto(producto, 1)"
                 class="p-2 rounded-full bg-blue-600 text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
                 <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round"
                      stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -34,7 +35,7 @@
               <h3 class="text-gray-700 uppercase">{{ producto.nombre }}</h3>
               <span class="text-gray-500 mt-2">{{ producto.precio | currency }}</span>
             </div>
-            <detalle-root [idProducto]="producto"></detalle-root>
+            <detalle-root [producto]="producto"></detalle-root>
 
           </div>
           <div [class]="filtroAbierto ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'"

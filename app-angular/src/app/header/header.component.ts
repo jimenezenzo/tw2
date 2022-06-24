@@ -6,6 +6,7 @@ import {CognitoUserAttribute, CognitoUserPool, CognitoUserSession} from "amazon-
 import {Router} from "@angular/router"
 import {LogoutUsuario, LoguearUsuario} from "../Store/Auth/Auth.actions"
 import {AuthService} from "../services/auth/auth.service"
+import {MostrarTodos} from "../Store/Producto/Producto.actions"
 
 @Component({
   selector: 'app-header',
@@ -14,7 +15,7 @@ import {AuthService} from "../services/auth/auth.service"
 })
 export class HeaderComponent implements OnInit {
 
-  cartOpen = false
+  cartOpen: boolean = false
   isOpen = false
   cantidadCarrito: number = 0
   poolData = {
@@ -26,12 +27,16 @@ export class HeaderComponent implements OnInit {
   logueado: Observable<boolean> = new Observable<boolean>(subscriber => subscriber.next(false))
 
   constructor(private store: Store, private router: Router, private authService: AuthService) {
+    store.dispatch(new MostrarTodos())
     this.store.select(state => state.carrito.productos).subscribe(p => {
-      this.cantidadCarrito = p.length
+      this.cantidadCarrito = this.calcularCantidadDeProductos(p)
     })
     this.store.subscribe(state => {
       this.nombre = new Observable<string>(subscriber => subscriber.next(state.auth.usuario?.nombre ?? ''))
       this.logueado = new Observable<boolean>(subscriber => subscriber.next(state.auth.usuario?.logueado ?? false))
+    })
+    this.store.subscribe(state => {
+      this.cartOpen = state.carrito.carritoAbierto
     })
   }
 
@@ -41,6 +46,12 @@ export class HeaderComponent implements OnInit {
         this.store.dispatch(new LoguearUsuario(valor[0], valor[1]))
       )
     }
+  }
+
+  private calcularCantidadDeProductos = (productos: Array<{producto: any, cantidad: number}>) => {
+    return productos.reduce((contador, valorActual) => {
+      return contador + valorActual.cantidad
+    }, 0)
   }
 
   logout() {

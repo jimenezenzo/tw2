@@ -10,7 +10,7 @@ class PaymentController {
 
         const payment = await this.subscriptionService.createPayment(items);
   
-        return res.json({payment: payment.init_point});
+        return res.json(payment);
       } catch (error) {
         console.log(error);
   
@@ -18,16 +18,18 @@ class PaymentController {
       }
     }
   
-    async getSubscriptionLink(req, res) {
-      try {
-        const subscription = await this.subscriptionService.createSubscription();
-  
-        return res.json(subscription);
-      } catch (error) {
-        console.log(error);
-  
-        return res.status(500).json({ error: true, msg: "Failed to create subscription" });
+    webhook(req, res) { 
+      if (req.method === "POST") { 
+        let body = ""; 
+        req.on("data", chunk => {  
+          body += chunk.toString();
+        });
+        req.on("end", () => {  
+          console.log(body, "webhook response"); 
+          res.end("ok");
+        });
       }
+      return res.status(200); 
     }
 }
   

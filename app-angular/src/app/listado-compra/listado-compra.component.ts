@@ -26,20 +26,8 @@ export class ListadoCompraComponent implements OnInit {
   }
 
   public realizarPago(){
-    let linkPago = '';
-
-    this.carrito.subscribe(p => {
-      const productos = p.map(p => ({
-        title: p.producto.nombre, 
-        category_id: p.producto.categoria,
-        quantity: p.cantidad,
-        unit_price: p.producto.precio
-      }));
-
-      this._productoService.realizarPago(productos)
-        .subscribe(res => {
-          console.log(res)
-        })
+    this._productoService.realizarPago().subscribe(data => {
+      window.location.href = data.init_point
     })
   }
 }

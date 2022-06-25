@@ -1,16 +1,5 @@
-generar usuarios de prueba
-curl -X POST \
--H "Content-Type: application/json" \
--H 'Authorization: Bearer TEST-8021483252201194-062313-7375e2a209b15512a98ffd729cd07459-299565232' \
-"https://api.mercadopago.com/users/test_user" \
--d '{"site_id":"MLA"}'
-
 comprador
 {"id":1148180983,"nickname":"TESTCYZKS4PE","password":"qatest6002","site_status":"active","email":"test_user_34224223@testuser.com"}
 
 vendedor
 {"id":1148182662,"nickname":"TESTN93PYY6Q","password":"qatest6558","site_status":"active","email":"test_user_88662483@testuser.com"}
-
-http://success/?collection_id=23421652731&collection_status=approved&payment_id=23421652731&status=approved&external_reference=null&payment_type=credit_card&merchant_order_id=5041245823&preference_id=1148182662-5d62c1a4-6de7-4547-9c0c-91ef01859fa1&site_id=MLA&processing_mode=aggregator&merchant_account_id=null
-
-http://success/?collection_id=23422585907&collection_status=approved&payment_id=23422585907&status=approved&external_reference=null&payment_type=credit_card&merchant_order_id=5041516257&preference_id=1148182662-561f14a3-02d7-4c8b-a896-5891211210a9&site_id=MLA&processing_mode=aggregator&merchant_account_id=null

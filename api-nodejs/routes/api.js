@@ -17,9 +17,8 @@ router.post("/payment", function (req, res, next) {
     PaymentInstance.getPaymentLink(req, res);
 });
   
-router.post("/subscription", function (req, res, next) {
-    PaymentInstance.getSubscriptionLink(req, res);
+router.post("/webhook", function (req, res, next) {
+    PaymentInstance.webhook(req, res);
 });
-
 
 export default router;

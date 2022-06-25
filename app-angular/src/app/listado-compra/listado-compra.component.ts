@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { ItemProducto } from '../models/ItemProducto';
 import { ProductosService } from '../services/productos/productos.service';
 import { RemoveProducto } from '../Store/Carrito/Carrito.actions';
+import {CambiarEstadoCarrito, RemoveProducto} from '../Store/Carrito/Carrito.actions'
 
 @Component({
   selector: 'app-listado-compra',
@@ -19,6 +20,7 @@ export class ListadoCompraComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.store.dispatch(new CambiarEstadoCarrito(false))
   }
 
   public removeProducto(id: string) {

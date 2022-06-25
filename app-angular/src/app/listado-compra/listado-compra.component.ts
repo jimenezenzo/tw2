@@ -3,7 +3,6 @@ import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { ItemProducto } from '../models/ItemProducto';
 import { ProductosService } from '../services/productos/productos.service';
-import { RemoveProducto } from '../Store/Carrito/Carrito.actions';
 import {CambiarEstadoCarrito, RemoveProducto} from '../Store/Carrito/Carrito.actions'
 
 @Component({

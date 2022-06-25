@@ -26,7 +26,6 @@ import {ConfirmarCuentaComponent} from "./Auth/confirmar-cuenta/confirmarCuenta.
 import {AuthService} from "./services/auth/auth.service"
 import {AuthState} from "./Store/Auth/Auth.state";
 import { ListadoCompraComponent } from './listado-compra/listado-compra.component';
-import { EstadoCompraComponent } from './estado-compra/estado-compra.component'
 
 
 @NgModule({
@@ -44,7 +43,6 @@ import { EstadoCompraComponent } from './estado-compra/estado-compra.component'
     FiltroComponent,
     ConfirmarCuentaComponent,
     ListadoCompraComponent,
-    EstadoCompraComponent,
   ],
   imports: [
     FormsModule,

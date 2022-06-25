@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { ItemProducto } from '../models/ItemProducto';
 import { Producto } from '../models/producto';
 import { ProductosService } from '../services/productos/productos.service';
 import { AddProducto } from '../Store/Carrito/Carrito.actions';
-import {AuthService} from "../services/auth/auth.service"
 
 @Component({
   selector: 'app-home',
@@ -20,13 +20,13 @@ export class HomeComponent implements OnInit {
   productoSelect: Producto;
   slider:any;
   defaultTransform:any;
+  statu_compra: string;
 
-  
-
-  constructor(private store: Store, private _productoService: ProductosService) {
+  constructor(private store: Store, private _productoService: ProductosService, private route: ActivatedRoute){
     this.carrito = this.store.select(state => state.carrito.productos);
     this.productos = [];
     this.productoSelect = this.productos[0]
+    this.statu_compra = ''
   }
 
   ngOnInit(): void {
@@ -37,13 +37,13 @@ export class HomeComponent implements OnInit {
       this.productos = data;
       this.productoSelect = data[0]
       this.productosCarrito = this.randomsArray(data);
-
-      console.log(this.productosCarrito)
     });
+
+    this.route.queryParams.subscribe(params => {
+      this.statu_compra = params['status'];
+    }
+  );
   }
-
-    
-
 
   public addProducto(producto: Producto, cantidad: number){
     this.store.dispatch(new AddProducto({producto, cantidad}))
@@ -66,7 +66,6 @@ export class HomeComponent implements OnInit {
                 .sort(() => Math.random() > 0.5 ? 1 : -1)
                 .slice(0,6)
   }
-  
  
 }
 

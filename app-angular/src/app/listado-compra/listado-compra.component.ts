@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
+import { CarritoStateModel } from '../models/Carrito';
 import { ItemProducto } from '../models/ItemProducto';
 import { ProductosService } from '../services/productos/productos.service';
 import {CambiarEstadoCarrito, RemoveProducto} from '../Store/Carrito/Carrito.actions'
+import { CarritoState } from '../Store/Carrito/Carrito.state';
 
 @Component({
   selector: 'app-listado-compra',
@@ -12,11 +14,13 @@ import {CambiarEstadoCarrito, RemoveProducto} from '../Store/Carrito/Carrito.act
 })
 export class ListadoCompraComponent implements OnInit {
 
-  carrito: Observable<ItemProducto[]>;
+  @Select(CarritoState.getProductos)
+  carrito!: Observable<ItemProducto[]>;
 
-  constructor(private _productoService: ProductosService, private store: Store) {
-    this.carrito = this.store.select(state => state.carrito.productos)
-  }
+  @Select(CarritoState.getTotal)
+  carritoTotal!: Observable<number>;
+
+  constructor(private _productoService: ProductosService, private store: Store) {}
 
   ngOnInit(): void {
     this.store.dispatch(new CambiarEstadoCarrito(false))
@@ -27,8 +31,8 @@ export class ListadoCompraComponent implements OnInit {
   }
 
   public realizarPago(){
-    this._productoService.realizarPago().subscribe(data => {
-      window.location.href = data.init_point
+    this._productoService.realizarPago().subscribe(payment => {
+      window.location.href = payment.init_point
     })
   }
 }

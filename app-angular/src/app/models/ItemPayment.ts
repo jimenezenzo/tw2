@@ -1,4 +1,4 @@
-interface ItemPayment {
+export interface ItemPayment {
     title: string,
     description: string,
     category_id: string,

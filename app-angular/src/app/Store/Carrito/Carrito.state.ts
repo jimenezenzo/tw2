@@ -8,19 +8,25 @@ import {
 } from './Carrito.actions'
 import {CarritoStateModel} from '../../models/Carrito'
 
-@State({
+@State<CarritoStateModel>({
   name: 'carrito',
   defaults: {
     productos: [],
+    total: 0,
     carritoAbierto: false
   }
 })
 @Injectable()
 export class CarritoState {
-  // Obtiene todos los productos del estado
+  //Obtiene todos los productos del estado
   @Selector()
   static getProductos(state: CarritoStateModel) {
     return state.productos
+  }
+
+  @Selector()
+  static getTotal(state: CarritoStateModel) {
+    return state.productos.reduce((previousValue, p) => previousValue + (p.producto.precio * p.cantidad), 0)
   }
 
   // Añade un nuevo producto al estado
@@ -31,7 +37,8 @@ export class CarritoState {
 
     if (productos.some(p => p.producto._id == itemProducto.producto._id)) {
       this.updateCantidad(ctx, new UpdateCantidad(itemProducto.producto._id, itemProducto.cantidad))
-    } else {
+    } 
+    else {
       ctx.patchState({
         productos: [...productos, itemProducto],
         carritoAbierto: true

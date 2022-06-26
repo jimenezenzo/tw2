@@ -31,8 +31,8 @@ export class ListadoCompraComponent implements OnInit {
   }
 
   public realizarPago(){
-    this._productoService.realizarPago().subscribe(data => {
-      window.location.href = data.init_point
+    this._productoService.realizarPago().subscribe(payment => {
+      window.location.href = payment.init_point
     })
   }
 }

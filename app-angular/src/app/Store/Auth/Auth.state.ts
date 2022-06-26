@@ -3,10 +3,14 @@ import { Injectable } from '@angular/core';
 import {AuthStateModel} from "../../models/Auth"
 import {LogoutUsuario, LoguearUsuario} from "./Auth.actions"
 
-@State({
+@State<AuthStateModel>({
     name: 'auth',
     defaults: {
-      usuario: null
+      usuario: {
+        nombre: '',
+        email: '',
+        logueado: false
+      }
     }
 })
 @Injectable()

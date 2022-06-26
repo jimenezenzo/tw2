@@ -1,4 +1,4 @@
-interface IUsuario {
+export interface IUsuario {
   nombre: string | null,
   email: string,
   logueado: boolean

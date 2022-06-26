@@ -4,7 +4,11 @@ import { Producto } from "../../models/producto";
 import {Filtros} from "../../models/Filtro"
 import { Observable } from 'rxjs';
 import { ItemProducto } from 'src/app/models/ItemProducto';
-import { Store } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
+import { Payment } from 'src/app/models/Payment';
+import { CarritoState } from 'src/app/Store/Carrito/Carrito.state';
+import { AuthState } from 'src/app/Store/Auth/Auth.state';
+import { IUsuario } from 'src/app/models/Auth';
 
 
 @Injectable({
@@ -12,11 +16,13 @@ import { Store } from '@ngxs/store';
 })
 export class ProductosService {
 
-  carrito: Observable<ItemProducto[]>;
+  @Select(CarritoState.getProductos)
+  carrito!: Observable<ItemProducto[]>;
 
-  constructor(private httpCliente: HttpClient, private store: Store) {
-    this.carrito = this.store.select(state => state.carrito.productos)
-  }
+  @Select(AuthState.getUsuario)
+  user!: Observable<IUsuario>
+
+  constructor(private httpCliente: HttpClient, private store: Store) {}
 
   getAllProducts(){
     return this.httpCliente.get<Producto[]>('http://localhost:4000/api/productos')
@@ -43,7 +49,7 @@ export class ProductosService {
   }
 
   realizarPago(){
-    let productos;
+    let productos, emailAuth, nombreAuth;
     
     this.carrito.subscribe(p => {
       productos = p.map(p => ({
@@ -55,6 +61,11 @@ export class ProductosService {
       }));
     })
 
-    return this.httpCliente.post<any>('http://localhost:4000/api/payment', {items: productos})
+    this.user.subscribe(u => {
+      emailAuth = u.email,
+      nombreAuth = u.nombre
+    })
+
+    return this.httpCliente.post<Payment>('http://localhost:4000/api/payment', {items: productos, email: emailAuth, nombre: nombreAuth})
   }
 }

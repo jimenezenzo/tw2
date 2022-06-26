@@ -2,7 +2,7 @@ import axios from 'axios';
 
 class PaymentService {
 
-    async createPayment(productos) {
+    async createPayment(productos, name, email) {
 
         const url = "https://api.mercadopago.com/checkout/preferences";
 
@@ -10,9 +10,9 @@ class PaymentService {
             items: productos,
             external_reference: "Taller Web 2", 
             payer: { 
-              name: "Lalo",
-              surname: "Landa",
-              email: "test_user_34224223@testuser.com", 
+              name: name,
+              surname: "Test",
+              email: email, 
               phone: {
                 area_code: "11",
                 number: "22223333"

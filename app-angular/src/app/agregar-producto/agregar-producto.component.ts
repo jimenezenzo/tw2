@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Producto } from 'src/app/models/producto';
 import { NgForm } from '@angular/forms';
-import { empty } from 'rxjs';
+import { ProductosService } from '../services/productos/productos.service';
 
 @Component({
   selector: 'app-agregar-producto',
@@ -11,7 +11,7 @@ import { empty } from 'rxjs';
 export class AgregarProductoComponent implements OnInit {
 
   detallesProducto: Producto = {
-    _id : "0",
+    _id : "",
     nombre : "",
     categoria: "",
     precio : 0,
@@ -25,12 +25,12 @@ export class AgregarProductoComponent implements OnInit {
   }; 
   cargando: boolean = false
 
-  constructor() { }
+   constructor(private _productoService: ProductosService,) {}
 
   ngOnInit(): void {
   }
 
   crearProducto (formulario : NgForm){
-    
+    this._productoService.createProduct(formulario.value).subscribe();
   }
 }

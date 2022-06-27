@@ -29,6 +29,7 @@ import { ListadoCompraComponent } from './listado-compra/listado-compra.componen
 import { AgregarProductoComponent } from './agregar-producto/agregar-producto.component'
 
 
+
 @NgModule({
   declarations: [
     InicioComponent,

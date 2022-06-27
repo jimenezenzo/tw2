@@ -1,0 +1,5 @@
+comprador
+{"id":1148180983,"nickname":"TESTCYZKS4PE","password":"qatest6002","site_status":"active","email":"test_user_34224223@testuser.com"}
+
+vendedor
+{"id":1148182662,"nickname":"TESTN93PYY6Q","password":"qatest6558","site_status":"active","email":"test_user_88662483@testuser.com"}

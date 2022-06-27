@@ -14,3 +14,8 @@ export class UpdateCantidad {
     static readonly type = '[PRODUCTOS] Update cantidad';
     constructor( public id: string, public cant: number ) {}
 }
+
+export class CambiarEstadoCarrito {
+    static readonly type = '[PRODUCTOS] Update cantidad';
+    constructor( public estado: boolean ) {}
+}

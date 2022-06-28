@@ -5,6 +5,7 @@ import {
   buscarProductos,
   crearProducto2,
   borrarProducto,
+  actualizarProducto,
 } from '../controllers/ProductosController.js';
 import PaymentController from '../controllers/PaymentsControllers.js';
 import PaymentService from '../services/PaymetService.js';
@@ -19,6 +20,7 @@ router.post('/buscar-productos', buscarProductos);
 router.post('/crear-producto', crearProducto2);
 router.get('/crear', crearProducto);
 router.delete('/borrar-producto', borrarProducto);
+router.put('/actualizar-producto', actualizarProducto);
 
 router.post('/payment', function (req, res, next) {
   PaymentInstance.getPaymentLink(req, res);

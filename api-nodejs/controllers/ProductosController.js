@@ -6,6 +6,26 @@ const obtenerProductos = async (request, response) => {
     return response.status(200).json(productos);
 };
 
+const actualizarProducto = async (request, response) => {
+  const productoId = request.query.id;
+  const update = request.body;
+  console.log(request.body);
+  try {
+    const productoActulizado = await Producto.findByIdAndUpdate(
+      productoId,
+      update
+    );
+    return response.status(202).json({
+      message: `${productoActulizado.nombre} fue Actualizado.`,
+      producto: productoActulizado,
+    });
+  } catch (error) {
+    return response
+      .status(409)
+      .json({ error: error.message, message: 'Id no encontrada.' });
+  }
+};
+
 const borrarProducto = async (request, response) => {
   const productoId = request.query.id;
   const productoABorrar = await Producto.findById(productoId);
@@ -233,4 +253,5 @@ export {
   crearProducto2,
   buscarProductos,
   borrarProducto,
+  actualizarProducto,
 };

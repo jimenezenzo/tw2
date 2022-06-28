@@ -18,7 +18,7 @@ router.post('/producto', crearProducto);
 router.post('/buscar-productos', buscarProductos);
 router.post('/crear-producto', crearProducto2);
 router.get('/crear', crearProducto);
-router.post('/borrar-producto', borrarProducto);
+router.delete('/borrar-producto', borrarProducto);
 
 router.post('/payment', function (req, res, next) {
   PaymentInstance.getPaymentLink(req, res);

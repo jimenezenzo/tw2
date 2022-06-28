@@ -6,17 +6,30 @@ const obtenerProductos = async (request, response) => {
     return response.status(200).json(productos);
 };
 
+const borrarProducto = async (request, response) => {
+  const productoId = request.query.id;
+  const productoABorrar = await Producto.findById(productoId);
+  try {
+    const productoBorrado = await productoABorrar.remove();
+    return response.status(202).json({
+      message: `${productoBorrado.nombre} fue borrado.`,
+      producto: productoBorrado,
+    });
+  } catch (error) {
+    return response
+      .status(409)
+      .json({ error: error.message, message: 'Id no encontrada.' });
+  }
+};
+
 const crearProducto2 = async (request, response) => {
   console.log(request.body);
   console.log(request);
-  // const producto = new Producto(request.body);
+  const producto = new Producto(request.body);
 
   try {
-    //const productoGuardado = await producto.save();
-    const producto = await new Producto(request.body);
-    console.log(producto);
-    return response.status(200);
-    //return response.status(202).json({ producto: productoGuardado });
+    const productoGuardado = await producto.save();
+    return response.status(202).json({ producto: productoGuardado });
   } catch (error) {
     return response.status(409).json({ error: error.message });
   }
@@ -214,4 +227,10 @@ const buscarProductos = async (request, response) => {
   return response.status(200).json(productos);
 };
 
-export { obtenerProductos, crearProducto, crearProducto2, buscarProductos };
+export {
+  obtenerProductos,
+  crearProducto,
+  crearProducto2,
+  buscarProductos,
+  borrarProducto,
+};

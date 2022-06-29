@@ -13,8 +13,7 @@
         Agregar Producto
       </h2>
 
-      <form (submit)="crearProducto(formulario)" #formulario="ngForm" class="mt-10" ngNativeValidate>
-
+      <form (submit)="crearProducto(formulario)" #formulario="ngForm" class="mt-10" ngNativeValidate enctype="multipart/form-data">
 
         <!-- Nombre Input -->
         <div class="grid grid-cols-2 gap-4">
@@ -105,7 +104,7 @@
           <div>
             <label for="imagen" class="block text-xs font-semibold text-gray-600 uppercase">Imagen</label>
             <input id="imagen" type="file" name="imagen" [(ngModel)]="detallesProducto.imagen" placeholder="Ingresar imagen"
-                   autocomplete="Imagen"
+                   autocomplete="Imagen" (change)="cargarImagen($event)"
                    class="block w-full py-3 px-1 mt-2
                         text-gray-800 appearance-none
                         border-b-2 border-gray-100

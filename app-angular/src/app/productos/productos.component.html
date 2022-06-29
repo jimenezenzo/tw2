@@ -19,7 +19,7 @@
           <div *ngFor="let producto of productos | async; index as i"
                class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
             <div class="flex items-end justify-end h-56 w-full bg-cover"
-            style="background-image: url(./assets/img/{{producto.imagen}});">
+            style="background-image: url(http://localhost:4000/files/{{producto.imagen}});">
             <button
                 (click)="addProducto(producto, 1)"
                 class="p-2 rounded-full bg-blue-600 text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500">

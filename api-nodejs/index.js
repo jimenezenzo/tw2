@@ -15,6 +15,8 @@ app.use(express.json());
 
 app.use(cors(corsOptionsDelegate));
 
+app.use(express.static('public'));
+
 app.use("/api", router);
 
 const PORT = process.env.PORT || 4000;

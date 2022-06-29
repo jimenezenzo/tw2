@@ -1,7 +1,7 @@
 <div>
     <div class="flex justify-between mt-6" *ngFor="let producto of carrito | async">
         <div class="flex">
-            <img class="h-20 w-20 object-cover rounded" src="/assets/img/{{producto.producto.imagen}}" alt="">
+            <img class="h-20 w-20 object-cover rounded" src="http://localhost:4000/files/{{producto.producto.imagen}}" alt="">
             <div class="mx-3 flex flex-col">
                 <h3 class="text-sm text-gray-900">{{ producto.producto.nombre }}</h3>
                 <h4 class="text-sm text-gray-400">{{ producto.producto.categoria }}</h4>

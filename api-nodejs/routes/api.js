@@ -9,15 +9,15 @@ import {
 } from '../controllers/ProductosController.js';
 import PaymentController from '../controllers/PaymentsControllers.js';
 import PaymentService from '../services/PaymetService.js';
+import storage from '../config/storage.js';
 
 const router = express.Router();
 const PaymentInstance = new PaymentController(new PaymentService());
 
 // endpoints api
 router.get('/productos', obtenerProductos);
-router.post('/producto', crearProducto);
 router.post('/buscar-productos', buscarProductos);
-router.post('/crear-producto', crearProducto2);
+router.post('/crear-producto', storage.single('imagen'), crearProducto2);
 router.get('/crear', crearProducto);
 router.delete('/borrar-producto', borrarProducto);
 router.put('/actualizar-producto', actualizarProducto);

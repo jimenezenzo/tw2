@@ -40,7 +40,7 @@
                             class="h-full flex lg:gap-8 md:gap-6 gap-14 items-center justify-start transition ease-out duration-700">
                             <div class="flex flex-shrink-0 relative w-full sm:w-auto"
                                 *ngFor="let prod of productosCarrito">
-                                <img src="/assets/img/{{prod.imagen}}" alt="black chair and white table"
+                                <img src="http://localhost:4000/files/{{prod.imagen}}" alt="black chair and white table"
                                     class="object-cover object-center w-full" style="width: 350px; height: 550px;" />
                                 <div class="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
                                     <h2 class="lg:text-xl leading-4 text-base lg:leading-5 text-white">{{prod.nombre}}
@@ -71,7 +71,7 @@
                     <div *ngFor="let producto of productos; index as i"
                         class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
                         <div class="flex items-end justify-end h-56 w-full bg-cover"
-                            style="background-image: url(./assets/img/{{producto.imagen}});">
+                            style="background-image: url(http://localhost:4000/files/{{producto.imagen}});">
                             <button (click)="addProducto(producto, 1)"
                                 class="p-2 rounded-full bg-blue-600 text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
                                 <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round"

@@ -43,12 +43,11 @@ const borrarProducto = async (request, response) => {
 };
 
 const crearProducto2 = async (request, response) => {
-  console.log(request.body);
-  console.log(request);
   const producto = new Producto(request.body);
-
   try {
-    const productoGuardado = await producto.save();
+    const productoGuardado = await producto
+      .save()
+      .then((respueta) => console.log(respueta));
     return response.status(202).json({ producto: productoGuardado });
   } catch (error) {
     return response.status(409).json({ error: error.message });

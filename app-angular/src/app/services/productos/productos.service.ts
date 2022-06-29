@@ -48,6 +48,7 @@ export class ProductosService {
       )
   }
 
+
   realizarPago(){
     let productos, emailAuth, nombreAuth;
     
@@ -67,5 +68,10 @@ export class ProductosService {
     })
 
     return this.httpCliente.post<Payment>('http://localhost:4000/api/payment', {items: productos, email: emailAuth, nombre: nombreAuth})
+  }
+
+  createProduct(producto : Producto){
+      return this.httpCliente.post<Producto>(
+        'http://localhost:4000/api/crear-producto', producto)
   }
 }

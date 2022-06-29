@@ -1,0 +1,152 @@
+<!-- Container -->
+<div class="flex flex-col h-screen bg-gray-100">
+  <!-- Auth Card Container -->
+  <div class="grid place-items-center mx-2 my-20 sm:my-auto">
+
+    <!-- Auth Card -->
+    <div class="w-11/12 p-12 sm:w-8/12 md:w-6/12 lg:w-5/12 2xl:w-6/12
+            px-6 py-10 sm:px-10 sm:py-6
+            bg-white rounded-lg shadow-md lg:shadow-lg">
+
+      <!-- Card Title -->
+      <h2 class="text-center font-semibold text-3xl lg:text-4xl text-gray-800">
+        Agregar Producto
+      </h2>
+
+      <form (submit)="crearProducto(formulario)" #formulario="ngForm" class="mt-10" ngNativeValidate>
+
+
+        <!-- Nombre Input -->
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label for="nombre" class="block text-xs font-semibold text-gray-600 uppercase">Nombre</label>
+            <input id="nombre" type="text" name="nombre" [(ngModel)]="detallesProducto.nombre" placeholder="Ingresar Nombre"
+                   autocomplete="Nombre"
+                   class="block w-full py-3 px-1 mt-2
+                        text-gray-800 appearance-none
+                        border-b-2 border-gray-100
+                        focus:text-gray-500 focus:outline-none focus:border-gray-200"
+                   required/>
+          </div>
+  
+           <!-- categoria Input -->
+           <div>
+             <label for="categoria" class="block text-xs font-semibold text-gray-600 uppercase">Categoria</label>
+             <input id="categoria" type="text" name="categoria" [(ngModel)]="detallesProducto.categoria" placeholder="Ingresar categoria"
+                    autocomplete="Categoria"
+                    class="block w-full py-3 px-1 mt-2
+                         text-gray-800 appearance-none
+                         border-b-2 border-gray-100
+                         focus:text-gray-500 focus:outline-none focus:border-gray-200"
+                    required/>
+           </div>
+  
+          <!-- precio Input -->
+          <div>
+            <label for="precio" class="block text-xs font-semibold text-gray-600 uppercase">Precio</label>
+            <input id="precio" type="number" name="precio" [(ngModel)]="detallesProducto.precio" placeholder="Ingresar precio"
+                   autocomplete="Precio"
+                   class="block w-full py-3 px-1 mt-2
+                        text-gray-800 appearance-none
+                        border-b-2 border-gray-100
+                        focus:text-gray-500 focus:outline-none focus:border-gray-200"
+                   required/>
+          </div>
+
+          <!-- descripcion Input -->
+          <div>
+            <label for="descripcion" class="block text-xs font-semibold text-gray-600 uppercase">Descripcion</label>
+            <input id="descripcion" type="text" name="descripcion" [(ngModel)]="detallesProducto.descripcion" placeholder="Ingresar descripcion"
+                   autocomplete="descripcion"
+                   class="block w-full py-3 px-1 mt-2
+                        text-gray-800 appearance-none
+                        border-b-2 border-gray-100
+                        focus:text-gray-500 focus:outline-none focus:border-gray-200"
+                   required/>
+          </div>
+  
+          <!-- almacenamiento Input -->
+          <div>
+            <label for="almacenamiento" class="block text-xs font-semibold text-gray-600 uppercase">Almacenamiento</label>
+            <input id="almacenamiento" type="text" name="almacenamiento" [(ngModel)]="detallesProducto.almacenamiento" placeholder="Ingresar almacenamiento"
+                   autocomplete="Almacenamiento"
+                   class="block w-full py-3 px-1 mt-2
+                        text-gray-800 appearance-none
+                        border-b-2 border-gray-100
+                        focus:text-gray-500 focus:outline-none focus:border-gray-200"
+                   required/>
+          </div>
+  
+          <!-- color Input -->
+          <div>
+            <label for="color" class="block text-xs font-semibold text-gray-600 uppercase">Color</label>
+            <input id="color" type="text" name="color" [(ngModel)]="detallesProducto.color" placeholder="Ingresar color"
+                   autocomplete="Color"
+                   class="block w-full py-3 px-1 mt-2
+                        text-gray-800 appearance-none
+                        border-b-2 border-gray-100
+                        focus:text-gray-500 focus:outline-none focus:border-gray-200"
+                   required/>
+          </div>
+  
+          <!-- stock Input -->
+          <div>
+            <label for="stock" class="block text-xs font-semibold text-gray-600 uppercase">Stock</label>
+            <input id="stock" type="number" name="stock" [(ngModel)]="detallesProducto.stock" placeholder="Ingresar stock"
+                   autocomplete="stock"
+                   class="block w-full py-3 px-1 mt-2
+                        text-gray-800 appearance-none
+                        border-b-2 border-gray-100
+                        focus:text-gray-500 focus:outline-none focus:border-gray-200"
+                   required/>
+          </div>
+                 
+          <!-- imagen Input -->
+          <div>
+            <label for="imagen" class="block text-xs font-semibold text-gray-600 uppercase">Imagen</label>
+            <input id="imagen" type="file" name="imagen" [(ngModel)]="detallesProducto.imagen" placeholder="Ingresar imagen"
+                   autocomplete="Imagen"
+                   class="block w-full py-3 px-1 mt-2
+                        text-gray-800 appearance-none
+                        border-b-2 border-gray-100
+                        focus:text-gray-500 focus:outline-none focus:border-gray-200"
+                   required/>
+          </div>
+
+          <div>
+            <!-- bateria Input -->
+            <label for="bateria" class="block text-xs font-semibold text-gray-600 uppercase">Bateria</label>
+            <input id="bateria" type="text" name="bateria" [(ngModel)]="detallesProducto.bateria" placeholder="Ingresar bateria"
+                   autocomplete="Bateria"
+                   class="block w-full py-3 px-1 mt-2
+                        text-gray-800 appearance-none
+                        border-b-2 border-gray-100
+                        focus:text-gray-500 focus:outline-none focus:border-gray-200"
+                   required/>
+          </div>
+          <!-- Marca Input -->
+          <div>
+            <label for="marca" class="block text-xs font-semibold text-gray-600 uppercase">Marca</label>
+            <input id="marca" type="text" name="marca" [(ngModel)]="detallesProducto.marca" placeholder="Ingresar marca"
+              autocomplete="marca" class="block w-full py-3 px-1 mt-2
+                                            text-gray-800 appearance-none
+                                            border-b-2 border-gray-100
+                                            focus:text-gray-500 focus:outline-none focus:border-gray-200" required />
+          </div>
+        </div>
+       
+
+        <button type="submit"
+                [disabled]="cargando"
+                class="w-full py-3 mt-10 bg-gray-800 rounded-sm focus:outline-none
+                  font-medium text-white uppercase
+                  focus:outline-none hover:bg-gray-700 hover:shadow-none "
+                [ngClass]="{'cursor-not-allowed': cargando}"
+        >
+          Crear Producto
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+

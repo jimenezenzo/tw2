@@ -71,7 +71,7 @@
                     <div *ngFor="let producto of productos; index as i"
                         class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
                         <div class="flex items-end justify-end h-56 w-full bg-cover"
-                            style="background-image: url(http://localhost:4000/files/{{producto.imagen}});">
+                            style="background-image: url(http://localhost:4000/files/{{producto.imagen}}); background-size: contain; background-repeat: no-repeat; background-position: center;">
                             <button (click)="addProducto(producto, 1)"
                                 class="p-2 rounded-full bg-blue-600 text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
                                 <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -87,7 +87,9 @@
                             <span class="text-gray-500 mt-2">{{ producto.precio | currency }}</span>
                         </div>
 
-                        <detalle-root [producto]="producto"></detalle-root>
+                        <div class="flex justify-center pb-2">
+                            <detalle-root [producto]="producto"></detalle-root>
+                        </div>
 
                     </div>
 

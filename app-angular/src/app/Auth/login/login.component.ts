@@ -20,30 +20,32 @@ export class LoginComponent implements OnInit {
   mostrarError: boolean = false
   error: string = ''
 
-  constructor(private router: Router, private store: Store, private authService: AuthService, private sessionService: SessionService) {
-  }
+  constructor(private router: Router, private store: Store, private authService: AuthService, private sessionService: SessionService) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   loguearse(form: NgForm) {
     if (form.valid) {
       this.mostrarError = false
       this.cargando = true
-      this.authService.loguearse(this.email, this.password).subscribe(
-        res => {
-          this.store.dispatch(new LoguearUsuario('Usuario', this.email))
+      this.authService.loguearse(this.email, this.password).subscribe({
+        next: (res) => {
           this.sessionService.setTokens(res)
-          this.router.navigate(['/'])
+          this.authService.getUsuarioActual().subscribe({
+            next: (user: any) =>{
+              this.store.dispatch(new LoguearUsuario(user.nombre.Value, user.email.Value))
+            }
+          })
         },
-        err => {
+        error: (err) => {
           this.mostrarError = true
           this.error = err.error.message
           this.cargando = false
         },
-        () => {
-          this.mostrarError = true
-        })
+        complete: () => {
+          this.router.navigate(['/'])
+        }
+      })
     }
   }
 }

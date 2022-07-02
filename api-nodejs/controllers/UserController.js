@@ -48,11 +48,7 @@ class UserController {
                 res.status(403).json({ message: "El usuario no esta logueado." });
             }
 
-            req.user = {
-                nombre: nombre,
-                email: email,
-            };
-            res.json(req.user)
+            res.json({nombre, email})
         } catch (err) {
             res.status(403).json({ message: "El usuario no esta logueado." });
         }

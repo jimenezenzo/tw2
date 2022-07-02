@@ -22,7 +22,7 @@ router.get('/productos', obtenerProductos);
 router.post('/buscar-productos', buscarProductos);
 router.post('/crear-producto', authMiddleware, storage.single('imagen'), crearProducto2);
 router.get('/crear', authMiddleware, crearProducto);
-router.delete('/borrar-producto', borrarProducto);
+router.delete('/borrar-producto', authMiddleware, borrarProducto);
 router.put('/actualizar-producto', authMiddleware, actualizarProducto);
 
 router.post('/payment', authMiddleware, function (req, res, next) {

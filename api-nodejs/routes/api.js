@@ -1,7 +1,6 @@
 import express from 'express';
 import {
   obtenerProductos,
-  crearProducto,
   buscarProductos,
   crearProducto2,
   borrarProducto,
@@ -21,7 +20,6 @@ const UserControllerInstance = new UserController();
 router.get('/productos', obtenerProductos);
 router.post('/buscar-productos', buscarProductos);
 router.post('/crear-producto', authMiddleware, storage.single('imagen'), crearProducto2);
-router.get('/crear', authMiddleware, crearProducto);
 router.delete('/borrar-producto', authMiddleware, borrarProducto);
 router.put('/actualizar-producto', authMiddleware, actualizarProducto);
 

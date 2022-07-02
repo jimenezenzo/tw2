@@ -1,108 +1,74 @@
 import {Injectable} from '@angular/core'
-import {CognitoUserAttribute, CognitoUserPool} from "amazon-cognito-identity-js"
-import {environment} from "../../../environments/environment"
-import {from, Observable} from "rxjs"
-import { AuthStateModel } from 'src/app/models/Auth'
+import {HttpClient} from "@angular/common/http"
+import {SessionService} from "../session/session.service"
+import {Router} from "@angular/router"
+
+export interface IUserToken {
+  accessToken: string;
+  refreshToken: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  poolData = {
-    UserPoolId: environment.cognitoUserPoolId, // Your user pool id here
-    ClientId: environment.cognitoAppClientId // Your client id here
+
+  constructor(private httpCliente: HttpClient, private sessionService: SessionService, private router: Router) {
   }
 
-  constructor() {
+  loguearse(email: string, password: string) {
+    return this.httpCliente.post<IUserToken>(
+      'http://localhost:4000/api/login',
+      {email: email, password: password}
+    )
   }
 
-  estaLogueado(): boolean {
-    var estaLogueado: boolean = false
+  async estaLogueado(): Promise<boolean> {
+    let sessionTokens = this.sessionService.getTokens()
 
-    var userPool = new CognitoUserPool(this.poolData)
-    var usuarioActual = userPool.getCurrentUser()
+    if (sessionTokens.accessTokenCognito === '' ||
+      sessionTokens.refreshToken === '' ||
+      sessionTokens.accessTokenCognito === null
+    ) {
+      return new Promise(res => res(false))
+    }
 
-    if (usuarioActual != null) {
-      usuarioActual.getSession((err: any, session: any) => {
-        if (err) {
-          alert(err.message || JSON.stringify(err))
-          return
-        }
-        estaLogueado = session.isValid()
+    return new Promise(resolve => {
+      this.httpCliente.get('http://localhost:4000/api/check-login').subscribe((next: any) => {
+        resolve(next.logueado)
       })
-    }
-    return estaLogueado
+    })
   }
 
-  getNombreUsuarioActual(): Observable<string> {
-    var userPool = new CognitoUserPool(this.poolData)
-    var usuarioActual = userPool.getCurrentUser()
-
-    var getNombre = () => {
-      return new Promise((resolve, reject) => {
-        if (usuarioActual != null) {
-          usuarioActual.getSession((err: any, session: any) => {
-            if (err) {
-              console.log(err.message || JSON.stringify(err))
-              reject('')
-            }
-            usuarioActual?.getUserAttributes((err: Error | undefined, result: CognitoUserAttribute[] | undefined) => {
-              if (err) {
-                console.log(err.message || JSON.stringify(err))
-                reject('')
-              }
-              var atributosUsuario = result ?? []
-
-              resolve(atributosUsuario.find(atributo => atributo.Name == 'name')?.Value ?? '')
-            })
-          })
-        } else {
-          reject('')
-        }
-      })
-    }
-
-    return from(getNombre() as Promise<string>)
+  getUsuarioActual() {
+    return this.httpCliente.get('http://localhost:4000/api/get-perfil')
   }
 
-  getUsuarioActual(): Observable<string[]> {
-    var userPool = new CognitoUserPool(this.poolData)
-    var usuarioActual = userPool.getCurrentUser()
-
-    var getUser = () => {
-      return new Promise((resolve, reject) => {
-        if (usuarioActual != null) {
-          usuarioActual.getSession((err: any, session: any) => {
-            if (err) {
-              reject(err.message)
-            }
-
-            usuarioActual?.getUserAttributes((err: Error | undefined, result: CognitoUserAttribute[] | undefined) => {
-              if (err) {
-                reject(err.message)
-              }
-
-              let atributos = result?.filter(d => ['name', 'email'].includes(d.Name))
-
-              resolve(atributos?.map(d => d.Value));
-            })
-          })
-
-        } else {
-          reject('Error')
-        }
-      })
-    }
-
-    return from(getUser() as Promise<string[]>)
+  recuperarContrasenia(email: string) {
+    return this.httpCliente.post(
+      'http://localhost:4000/api/recuperar-contrasenia',
+      {email: email}
+    )
   }
 
-  getToken(): string {
-    for (let i = 0; i < localStorage.length; i++) {
-      if (localStorage.key(i)?.endsWith('accessToken') && localStorage.key(i)?.includes(environment.cognitoAppClientId)) {
-        return localStorage.getItem(localStorage.key(i) ?? '') ?? ''
-      }
-    }
-    return ''
+  confirmarContrasenia(email: string, codigo: string, password: string) {
+    return this.httpCliente.post(
+      'http://localhost:4000/api/confirmar-contrasenia',
+      {email: email, codigo: codigo, password: password}
+    )
+  }
+
+  confirmarCuenta(email: string, codigo: string) {
+    return this.httpCliente.post(
+      'http://localhost:4000/api/confirmar-cuenta',
+      {email: email, codigo: codigo}
+    )
+  }
+
+  crearUsuario(nombre: string, email: string, direccion: string, password: string) {
+    return this.httpCliente.post(
+      'http://localhost:4000/api/registrar-usuario',
+      {nombre: nombre, email: email, direccion: direccion, password: password}
+    )
   }
 }

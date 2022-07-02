@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core'
 import {NgForm} from "@angular/forms"
 import {environment} from "../../../environments/environment"
 import {CognitoUserAttribute, CognitoUserPool} from "amazon-cognito-identity-js"
+import {AuthService} from "../../services/auth/auth.service"
 
 enum ErroresCreacionUsuarios {
   InvalidPasswordException = ('InvalidPasswordException'),
@@ -32,7 +33,7 @@ export class RegistrarComponent implements OnInit {
   mostrarError: boolean = false
   error: string = ''
 
-  constructor() {
+  constructor(private authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -41,53 +42,21 @@ export class RegistrarComponent implements OnInit {
   registrarse(formulario: NgForm) {
     if (formulario.valid) {
       this.cargando = true
-      var poolData = {
-        UserPoolId: environment.cognitoUserPoolId, // Your user pool id here
-        ClientId: environment.cognitoAppClientId // Your client id here
-      }
-      var userPool = new CognitoUserPool(poolData)
-      var listaDeAtributos = []
-      let datosDelForm: IForm = {
-        "name": this.nombre,
-        "email": this.email,
-        "address": this.direccion
-      }
-
-      for (let key in datosDelForm) {
-        let attrData = {
-          Name: key,
-          Value: datosDelForm[key]
-        }
-        let atributo = new CognitoUserAttribute(attrData)
-        listaDeAtributos.push(atributo)
-      }
-      userPool.signUp(this.email, this.password, listaDeAtributos, [], (
-        err,
-        result
-      ) => {
-        this.mostrarError = false
-        this.mostrarCreacion = false
-        this.cargando = false
-        if (err) {
+      this.mostrarError = false
+      this.mostrarCreacion = false
+      this.cargando = false
+      this.authService.crearUsuario(this.nombre, this.email, this.direccion, this.password).subscribe(
+        resolved => {
+          this.email = ''
+          this.nombre = ''
+          this.password = ''
+          this.mostrarCreacion = true
+        },
+        rejected => {
           this.mostrarError = true
-          if (err.name === ErroresCreacionUsuarios.InvalidPasswordException.toString()) {
-            this.error = 'El password debe tener al menos 8 caracteres, 1 caracter especial y una mayuscula.'
-          }
-          else if (err.name === ErroresCreacionUsuarios.InvalidParameterException.toString()) {
-            this.error = 'Se ingreso un email invalido o falto completar algun dato en el formulario.'
-          } else if (err.name === ErroresCreacionUsuarios.UsernameExistsException.toString()) {
-            this.error = 'Ya existe un usuario registrado con ese Email'
-          } else {
-            this.error = err.message || JSON.stringify(err)
-          }
-          console.log(err.name)
-          return
+          this.error = rejected.error
         }
-        this.email = ''
-        this.nombre = ''
-        this.password = ''
-        this.mostrarCreacion = true
-      })
+      )
     }
   }
 

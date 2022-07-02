@@ -1,22 +1,10 @@
 import {Component, OnInit} from '@angular/core'
 import {NgForm} from "@angular/forms"
-import {environment} from "../../../environments/environment"
-import {CognitoUserPool, CognitoUser, AuthenticationDetails, CognitoUserAttribute} from 'amazon-cognito-identity-js'
 import {Router} from "@angular/router"
 import {Store} from "@ngxs/store"
 import {LoguearUsuario} from "../../Store/Auth/Auth.actions"
 import {AuthService} from "../../services/auth/auth.service"
-
-enum ErroresLogin {
-  NotAuthorizedException = ('NotAuthorizedException'),
-  UserNotConfirmedException = ('UserNotConfirmedException')
-}
-
-interface IForm {
-  email: string
-
-  [key: string]: string;
-}
+import {SessionService} from "../../services/session/session.service"
 
 @Component({
   selector: 'app-login',
@@ -32,7 +20,7 @@ export class LoginComponent implements OnInit {
   mostrarError: boolean = false
   error: string = ''
 
-  constructor(private router: Router, private store: Store, private authService: AuthService) {
+  constructor(private router: Router, private store: Store, private authService: AuthService, private sessionService: SessionService) {
   }
 
   ngOnInit(): void {
@@ -42,41 +30,20 @@ export class LoginComponent implements OnInit {
     if (form.valid) {
       this.mostrarError = false
       this.cargando = true
-      let authenticationDetails = new AuthenticationDetails({
-        Username: this.email,
-        Password: this.password,
-      })
-      let poolData = {
-        UserPoolId: environment.cognitoUserPoolId, // Your user pool id here
-        ClientId: environment.cognitoAppClientId // Your client id here
-      }
-
-      let userPool = new CognitoUserPool(poolData)
-      let userData = {Username: this.email, Pool: userPool}
-      var cognitoUser = new CognitoUser(userData)
-      cognitoUser.authenticateUser(authenticationDetails, {
-        onSuccess: (result) => {
-          this.authService.getUsuarioActual().subscribe(
-            userDato => {
-              console.log('login: ', userDato)
-              this.store.dispatch(new LoguearUsuario(userDato[0], userDato[1]))
-              this.router.navigate(['/'])
-            }
-          )
+      this.authService.loguearse(this.email, this.password).subscribe(
+        res => {
+          this.store.dispatch(new LoguearUsuario('Usuario', this.email))
+          this.sessionService.setTokens(res)
+          this.router.navigate(['/'])
         },
-        onFailure: (err) => {
+        err => {
           this.mostrarError = true
-          if (err.name === ErroresLogin.NotAuthorizedException.toString()) {
-            this.error = "No existe usuario con ese email y contraseña."
-          } else if (err.name === ErroresLogin.UserNotConfirmedException.toString()) {
-            this.error = "El usuario aun no esta confirmado. Se le ha enviado un Email con el codigo de verificacion."
-          } else {
-            this.error = err.message || JSON.stringify(err)
-          }
-          console.log(err.name || JSON.stringify(err))
+          this.error = err.error.message
           this.cargando = false
         },
-      })
+        () => {
+          this.mostrarError = true
+        })
     }
   }
 }

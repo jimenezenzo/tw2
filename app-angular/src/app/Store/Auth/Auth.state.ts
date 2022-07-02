@@ -2,6 +2,7 @@ import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { Injectable } from '@angular/core';
 import {AuthStateModel} from "../../models/Auth"
 import {LogoutUsuario, LoguearUsuario} from "./Auth.actions"
+import {SessionService} from "../../services/session/session.service"
 
 @State<AuthStateModel>({
     name: 'auth',
@@ -15,7 +16,12 @@ import {LogoutUsuario, LoguearUsuario} from "./Auth.actions"
 })
 @Injectable()
 export class AuthState {
-    @Selector()
+
+  constructor(private sessionService: SessionService) {
+  }
+
+
+  @Selector()
     static getUsuario(state: AuthStateModel) {
         return state.usuario
     }
@@ -33,6 +39,7 @@ export class AuthState {
 
     @Action(LogoutUsuario)
     removeProducto(ctx: StateContext<AuthStateModel>) {
+        this.sessionService.eliminarTokens()
         ctx.patchState({
             usuario: undefined
         });

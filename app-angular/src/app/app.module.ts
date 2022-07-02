@@ -6,7 +6,7 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { environment } from 'src/environments/environment';
 import { CarritoState } from './Store/Carrito/Carrito.state';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http'
 import { InicioComponent } from './Inicio/inicio.component';
 import { LoginComponent } from './Auth/login/login.component';
 import { RegistrarComponent } from './Auth/registrar/registrar.component';
@@ -27,6 +27,8 @@ import {AuthService} from "./services/auth/auth.service"
 import {AuthState} from "./Store/Auth/Auth.state";
 import { ListadoCompraComponent } from './listado-compra/listado-compra.component';
 import { AgregarProductoComponent } from './agregar-producto/agregar-producto.component'
+import {SessionService} from "./services/session/session.service"
+import {AuthInterceptor} from "./interceptors/AuthInterceptor"
 
 
 
@@ -70,6 +72,12 @@ import { AgregarProductoComponent } from './agregar-producto/agregar-producto.co
   providers: [
     ProductosService,
     AuthService,
+    SessionService,
+    {
+      provide : HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi   : true,
+    },
   ],
   bootstrap: [InicioComponent]
 })

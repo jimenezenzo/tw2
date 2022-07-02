@@ -13,11 +13,13 @@ export class LoginGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (this.authService.estaLogueado()) {
-      this.router.navigate(['/'])
-      return false
-    }
-    return true
+    return new Promise(resolve => {
+      this.authService.estaLogueado().then((logueado) => {
+          if (logueado) {
+            this.router.navigate(['/'])
+          }
+          resolve(!logueado)
+        })
+    })
   }
-
 }

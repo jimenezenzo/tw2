@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'productos', component: ProductosComponent},
   { path: 'confirmar-cuenta', component: ConfirmarCuentaComponent},
   { path: 'listado-compra', component: ListadoCompraComponent, canActivate: [AuthGuardGuard]},
-  { path: 'agregar-producto', component: AgregarProductoComponent}
+  { path: 'agregar-producto', component: AgregarProductoComponent, canActivate: [AuthGuardGuard]}
 ];
 
 @NgModule({

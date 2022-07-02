@@ -12,6 +12,8 @@
   "author": "GrupoTw2",
   "license": "ISC",
   "dependencies": {
+    "amazon-cognito-identity-js": "^5.2.9",
+    "aws-sdk": "^2.1166.0",
     "axios": "^0.27.2",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
